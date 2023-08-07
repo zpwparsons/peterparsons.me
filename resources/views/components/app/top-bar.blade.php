@@ -3,6 +3,7 @@
     @keydown.window.escape="open = false"
     class="sticky top-0 z-10 flex h-14 bg-white dark:bg-mirage border-b border-slate-200 dark:border-mirage"
 >
+    <!-- Mobile navigation start -->
     <button
         @click="open = true"
         type="button"
@@ -14,7 +15,6 @@
         </svg>
     </button>
 
-    <!-- Mobile navigation start -->
     <div
         x-show="open"
         class="relative z-50 lg:hidden"
@@ -83,7 +83,7 @@
         </div>
 
         <div class="ml-4 flex items-center">
-            <x-app.theme-toggle />
+            <x-app.theme />
         </div>
     </div>
 </div>

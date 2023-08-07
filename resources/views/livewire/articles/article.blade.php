@@ -1,5 +1,18 @@
 <article class="prose prose-blue dark:prose-dark prose-lg prose-pre:bg-white prose-pre:text-slate-500 dark:prose-pre:text-slate-400 dark:prose-pre:bg-mirage text-slate-500 dark:text-slate-400 prose-h1:text-3xl prose-a:text-blue-600 dark:prose-a:text-lime-400 prose-headings:text-slate-900 dark:prose-headings:text-white prose-strong:text-slate-500 dark:prose-strong:text-slate-400">
-    # Write a Lexer in PHP with Lexical
+    <h1>Write a Lexer in PHP with Lexical</h1>
+
+    <pre>
+        <x-torchlight-code language='php'>
+            return [
+                'extensions' => [
+                    // Add attributes straight from markdown.
+                    AttributesExtension::class,
+                    // Add Torchlight syntax highlighting. [tl! focus]
+                    TorchlightExtension::class, // [tl! focus]
+                ],
+            ],
+        </x-torchlight-code>
+    </pre>
 
     Faucibus commodo massa rhoncus, volutpat. **Dignissim** sed **eget risus enim**. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. [Mattis mauris semper](/) sed amet vitae sed turpis id.
 
