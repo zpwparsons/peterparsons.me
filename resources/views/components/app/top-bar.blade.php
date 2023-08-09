@@ -73,14 +73,7 @@
     <!-- Mobile navigation end -->
 
     <div class="flex-1 px-4 flex justify-end">
-        <div class="flex">
-            <button type="button" class="p-1 rounded-full text-slate-400 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none focus:ring-0">
-                <span class="sr-only">Search</span>
-                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-                </svg>
-            </button>
-        </div>
+        <livewire:components.app.search />
 
         <div class="ml-4 flex items-center">
             <x-app.theme />

@@ -1,14 +1,13 @@
-<div>
-    Who the hell am I?
-    ==================
+<x-app.prose>
+{!! \Illuminate\Support\Str::markdown("Who the hell am I?
 
-    I'm [@adamwathan](https://twitter.com/adamwathan), a full-stack developer, entrepreneur, and [Justin's worst nightmare](https://twitter.com/mijustin/status/1065299912013709312).
+I'm [@pw_parsons](https://twitter.com/pw_parsons), a digital daydreamer and coding enthusiast.
 
-    I share everything I know about making awesome software through my [articles](/articles), [talks](/talks), [screencasts](/screencasts), [podcast](/podcast), and [courses](/courses).
+By day, I'm a full-snack developer, weaving code into captivating experiences; by night, my wife's worst nightmare 🤪.
 
-    In 2016, I released my first book and left my job to [make things](/projects) full-time that help other developers build better software.
+Check out my [articles](/articles) for insights, tips, and tales from the coding trenches.
 
-    Right now I'm working on [Tailwind CSS](/going-full-time-on-tailwind-css), and I share updates about my progress in my [work journal](/journal).
+Curious about the tools behind my digital wizardry? Swing by my [toolbox](/uses) for a curated list.
 
-    Curious about how I work? Check out my [uses](/uses) page for a full list of all the software, gadgets, and services I use.
-</div>
+Whether you're a fellow coder, design enthusiast, or a curious wanderer, welcome to my online abode. Let's navigate the digital realm together! 🚀🌐") !!}
+</x-app.prose>
