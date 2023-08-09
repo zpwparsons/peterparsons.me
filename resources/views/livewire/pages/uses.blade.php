@@ -86,45 +86,12 @@ These are some of the other apps I'm using:
 *   If you're not using a password manager, you're doing it wrong. I use [1Password](https://1password.com/). Personal passwords are sync in a vault stored on Dropbox. For Spatie we have a team account.
 *   All settings of my apps are backupped to Dropbox through [Mackup](https://github.com/lra/mackup). This is a fantastic piece of software that moves all your preferences to Dropbox and symlinks them.
 *   I don't use Time Machine, my backups are handled with [Backblaze](https://www.backblaze.com/).
-*   Tweets are tweeted with [Tweetbot](https://tapbots.com/tweetbot/mac/).
 *   I read a lot of blogs through RSS feeds in [Reeder](http://reederapp.com/mac/).
-*   Mails are read and written in [Mimestream](https://mimestream.com). Unlike other email clients which rely on IMAP, Mimestream uses the full Gmail API. It super fast, and the author is dedicated using the latest stuff in MacOS. It's a magnificent app really.
 *   My browser of choice is Safari, because of its speed and low power use. To block ads on certain sites I use [the AdGuard plugin](https://adguard.com/en/adguard-safari/overview.html).
 *   I like to write long blogposts in [iA Writer](https://ia.net/writer)
 *   To create [videos](https://spatie.be/videos) I use [ScreenFlow](https://www.telestream.net/screenflow/overview.htm).
-*   I regularly [stream stuff on YouTube](https://www.youtube.com/c/FreekVanderHerten/featured). For that I use [Ecamm Live](https://www.ecamm.com)
-*   To pair program with anyone in my team, I use [Tuple](https://tuple.app). The quality of the shared screen and sound is fantastic.
 *   Even though I'm not a designer I sometimes have to edit images. For this I use [Pixelmator](https://www.pixelmator.com/pro/).
 *   [DaisyDisk](https://daisydiskapp.com) is a nice app that helps you determine how your disk space is being use used.
-*   Outside of programming, I also [record music](/music). My DAW of choice is [Ableton](https://www.ableton.com), I'm using the complete edition.
-
-iOS
----
-
-Here's a screenshot of my current homescreen.
-
-![](https://freek.dev/admin-uploads/u5tw84os49wxmxiZhXsdUCeeMKtb2yDga6wgY2Rj.jpg)
-
-I don't use folders and try to keep the number of installed apps to a minimum. There's also just one screen with apps, all the other apps are opened via search. Most of my time is spent in Safari, Pocket, Reeder and Tweetbot. Notifications and notification badges are turned off for all apps except Messages.
-
-Here's a rundown of some of the apps currently on the homescreen:
-
-*   1Password: my favourite password manager
-*   Air Video HD: I find it much more reliable to sync videos to this one the stock Videos app. No iTunes needed.
-*   Overcast: an excellent podcast client
-*   Telegram: most of my geeky friends are on there
-*   iA writer: to quickly write some stuff or take notes on the go
-*   Clock: tick, tock, ...
-*   Home: my home is full off HomeKit controlled lights, which I switch on/off using this app
-*   Reeder: an RSS client
-*   Slack: for communicating with my team and some other communities
-*   Letterboxd: a pretty imdb. I use it to log every movie I watch
-*   Railer: to easily look up the train schedules in Belgium
-*   Pocket: my favourite read later service
-*   Things: contains my to dos
-*   Nuki: this controls the electronic doorlock at our office
-
-There's no other screens setup. I use the App Library to hunt down any app I want to use that isn't on the home screen.
 
 Hardware
 --------

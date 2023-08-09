@@ -24,7 +24,7 @@
                     <x-app.top-bar />
 
                     <main class="flex-1 relative z-0 h-screen overflow-y-auto focus:outline-none xl:order-last px-6 lg:px-8 py-12">
-                        <div class="mt-6 max-w-prose mx-auto">
+                        <div class="mt-6 mb-20 max-w-prose mx-auto">
                             {{ $slot }}
                         </div>
                     </main>

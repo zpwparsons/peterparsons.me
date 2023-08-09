@@ -14,6 +14,7 @@ class ArticleFactory extends Factory
     {
         return [
             'title'      => $this->faker->sentence(),
+            'excerpt'    => $this->faker->sentence(nbWords: 12),
             'content'    => $this->faker->paragraph(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

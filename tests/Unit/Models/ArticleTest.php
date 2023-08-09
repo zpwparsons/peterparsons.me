@@ -13,6 +13,7 @@ class ArticleTest extends TestCase
     {
         $attributes = [
             'title',
+            'excerpt',
             'content',
         ];
 
