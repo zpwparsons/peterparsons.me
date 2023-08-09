@@ -1,9 +1,9 @@
 <?php
 
-use App\Livewire\Articles\ShowArticle;
-use App\Livewire\Articles\ListArticles;
-use App\Livewire\Home;
-use App\Livewire\Uses;
+use App\Livewire\Pages\Articles\ListArticles;
+use App\Livewire\Pages\Articles\ShowArticle;
+use App\Livewire\Pages\Home;
+use App\Livewire\Pages\Uses;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages;
 
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -9,6 +9,6 @@ class Home extends Component
 {
     public function render(): View
     {
-        return view('livewire.home');
+        return view('livewire.pages.home');
     }
 }

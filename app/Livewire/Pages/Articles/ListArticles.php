@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Articles;
+namespace App\Livewire\Pages\Articles;
 
 use App\Models\Article;
 use Illuminate\Contracts\View\View;
@@ -18,6 +18,6 @@ class ListArticles extends Component
 
     public function render(): View
     {
-        return view('livewire.articles.list-articles');
+        return view('livewire.pages.articles.list-articles');
     }
 }
