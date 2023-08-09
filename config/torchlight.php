@@ -17,10 +17,10 @@ return [
     // you can use an array to define both themes. Torchlight renders
     // both on the page, and you will be responsible for hiding one
     // or the other depending on the dark / light mode via CSS.
-     'theme' => [
-         'dark' => 'atom-one-dark',
-         'light' => 'min-light',
-     ],
+    'theme' => [
+        'dark' => 'atom-one-dark',
+        'light' => 'min-light',
+    ],
 
     // Your API token from torchlight.dev.
     'token' => env('TORCHLIGHT_TOKEN'),
@@ -40,7 +40,7 @@ return [
     // block, Torchlight will look for code snippets in the
     // following directories.
     'snippet_directories' => [
-        resource_path()
+        resource_path(),
     ],
 
     // Global options to control blocks-level settings.
@@ -62,5 +62,5 @@ return [
         // When lines are collapsed, this is the text that will
         // be shown to indicate that they can be expanded.
         // 'summaryCollapsedIndicator' => '...',
-    ]
+    ],
 ];
