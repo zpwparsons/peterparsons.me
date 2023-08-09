@@ -13,7 +13,7 @@ pre {
  colors extend edge to edge.
 */
 pre code.torchlight {
-    @apply py-4 min-w-max rounded-md bg-white dark:bg-mirage !important;
+    @apply py-4 min-w-max rounded-md bg-white dark:bg-mirage text-base !important;
 }
 
 /*

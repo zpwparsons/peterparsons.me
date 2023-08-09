@@ -1,7 +1,7 @@
 <div class="flex flex-col flex-grow border-r border-slate-200 dark:border-vulcan bg-white dark:bg-mirage overflow-y-auto">
     <div class="sticky top-0 z-10 flex items-center flex-shrink-0 p-4 bg-white dark:bg-mirage opacity-90">
         <a href="{{ route('home') }}">
-            <h1 class="text-xl font-bold text-blue-600 dark:text-lime-400">
+            <h1 class="text-2xl font-bold text-blue-600 dark:text-lime-400">
                 Peter Parsons
             </h1>
         </a>
