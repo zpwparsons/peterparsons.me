@@ -1,6 +1,6 @@
 <div class="flex flex-col flex-grow border-r border-slate-200 dark:border-vulcan bg-white dark:bg-mirage overflow-y-auto">
     <div class="sticky top-0 z-10 flex items-center flex-shrink-0 p-4 bg-white dark:bg-mirage opacity-90">
-        <a href="/">
+        <a href="{{ route('home') }}">
             <h1 class="text-xl font-bold text-blue-600 dark:text-lime-400">
                 Peter Parsons
             </h1>
@@ -10,16 +10,16 @@
     <div class="flex-grow flex flex-col">
         <nav class="mt-5 flex-1 px-2 space-y-8 bg-white dark:bg-mirage" aria-label="Sidebar">
             <div class="space-y-2">
-                <x-app.link href="/" class="text-blue-600 dark:text-lime-400 bg-slate-100 dark:bg-madison/50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                <x-app.nav-link :route="route('home')" :active="request()->routeIs('home')">
                     <span class="text-slate-400 dark:text-slate-500 mr-3 flex-shrink-0 h-4 w-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                         </svg>
                     </span>
                     Home
-                </x-app.link>
+                </x-app.nav-link>
 
-                <x-app.link href="/articles" class="text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-madison/50 hover:text-slate-900 dark:hover:text-slate-300 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                <x-app.nav-link :route="route('articles:list')" :active="request()->routeIs('articles*')">
                     <span class="text-slate-400 dark:text-slate-500 mr-3 flex-shrink-0 h-4 w-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path>
@@ -27,7 +27,7 @@
                         </svg>
                     </span>
                     Articles
-                </x-app.link>
+                </x-app.nav-link>
 
                 <h3 class="pt-6 pb-2 px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider" id="Me-headline">
                     Me

@@ -10,23 +10,15 @@
             @foreach($articles as $article)
                 <article>
                     <h2 class="font-bold text-lg">
-                        <x-app.link href="/articles/{{ $article['url'] }}" class="hover:underline">
-                            {{ $article['title'] }}
+                        <x-app.link href="{{ route('articles:show', $article) }}" class="hover:underline">
+                            {{ $article->title }}
                         </x-app.link>
                     </h2>
 
                     <div class="flex items-center gap-x-3 mt-2">
                         <time datetime="2023-06-14 00:00:00" class="text-slate-400 dark:text-slate-500 text-sm block">
-                            {{ $article['date'] }}
+                            {{ $article->formatted_created_at }}
                         </time>
-
-                        @foreach($article['tags'] as $tag)
-                            <div class="flex space-x-1.5">
-                                <a href="/articles?category=php" class="text-xs hover:no-underline font-medium text-slate-900 dark:text-slate-300 bg-blue-300 dark:bg-madison/50 inline-block px-2 py-1 rounded-lg">
-                                    #{{ $tag }}
-                                </a>
-                            </div>
-                        @endforeach
                     </div>
                 </article>
             @endforeach
