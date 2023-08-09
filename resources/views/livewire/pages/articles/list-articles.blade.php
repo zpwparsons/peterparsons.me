@@ -15,7 +15,7 @@
                         </x-app.link>
                     </h2>
 
-                    <p class="my-2">
+                    <p class="my-3">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi asperiores assumenda beatae.
                     </p>
 

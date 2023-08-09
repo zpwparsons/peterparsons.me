@@ -7,9 +7,9 @@
 
     <p>By day, I'm a full-snack developer, weaving code into captivating experiences; by night, my wife's worst nightmare 🤪.</p>
 
-    <p>Check out my <a href="{{ route('articles:list') }}">articles</a> for insights, tips, and tales from the coding trenches.</p>
+    <p>Check out my <x-app.link href="{{ route('articles:list') }}">articles</x-app.link> for insights, tips, and tales from the coding trenches.</p>
 
-    <p>Curious about the tools behind my craftsmanship? Swing by my <a href="{{ route('uses') }}">toolbox</a> for a curated list.</p>
+    <p>Curious about the tools behind my craftsmanship? Swing by my <x-app.link href="{{ route('uses') }}">toolbox</x-app.link> for a curated list.</p>
 
     <p>Whether you're a fellow coder, design enthusiast, or a curious wanderer, welcome to my online abode. Let's navigate the digital realm together! 🚀</p>
 </article>
