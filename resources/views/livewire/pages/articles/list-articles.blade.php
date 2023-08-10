@@ -1,7 +1,7 @@
 <div>
     @if($articles->count())
         <div class="max-w-2xl w-full mx-auto flex-1">
-            <h1 class="font-bold text-3xl text-slate-900 dark:text-white">
+            <h1 class="font-bold text-2xl lg:text-3xl text-slate-900 dark:text-white">
                 Articles
             </h1>
 
@@ -10,18 +10,18 @@
             <div class="space-y-12">
                 @foreach($articles as $article)
                     <article>
-                        <h2 class="font-bold text-xl">
+                        <h2 class="font-bold text-lg lg:text-xl">
                             <x-app.link href="{{ route('articles:show', $article) }}" class="text-blue-600 dark:text-lime-400 hover:underline">
                                 {{ $article->title }}
                             </x-app.link>
                         </h2>
 
-                        <p class="my-3">
+                        <p class="my-3 text-sm lg:text-base">
                             {{ $article->excerpt }}
                         </p>
 
                         <div class="flex items-center gap-x-3 mt-2">
-                            <time datetime="2023-06-14 00:00:00" class="text-slate-400 dark:text-slate-500 text-sm block">
+                            <time datetime="2023-06-14 00:00:00" class="text-slate-400 dark:text-slate-500 text-xs lg:text-sm block">
                                 {{ $article->formatted_created_at }}
                             </time>
                         </div>
@@ -33,7 +33,7 @@
         </div>
     @else
         <div>
-            <h1 class="text-3xl font-bold text-center text-slate-900 dark:text-white">
+            <h1 class="text-2xl lg:text-3xl font-bold text-center text-slate-900 dark:text-white">
                 Articles Archive Awaits its Stories!
             </h1>
 

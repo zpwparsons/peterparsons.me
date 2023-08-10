@@ -9,7 +9,7 @@
         </x-app.prose>
     @else
         <div>
-            <h1 class="text-3xl font-bold text-center text-slate-900 dark:text-white">
+            <h1 class="text-2xl lg:text-3xl font-bold text-center text-slate-900 dark:text-white">
                 Toolbox Awaits its Treasures!
             </h1>
 
