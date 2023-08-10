@@ -22,7 +22,7 @@
 
                         <div class="flex items-center gap-x-3 mt-2">
                             <time datetime="2023-06-14 00:00:00" class="text-slate-400 dark:text-slate-500 text-xs lg:text-sm block">
-                                {{ $article->formatted_created_at }}
+                                {{ $article->formatted_published_date }}
                             </time>
                         </div>
                     </article>

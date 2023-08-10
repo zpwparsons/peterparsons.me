@@ -13,7 +13,11 @@ class ListArticles extends Component
 
     public function render(): View
     {
+        $articles = Article::query()
+            ->published()
+            ->fastPaginate();
+
         return view('livewire.pages.articles.list-articles')
-            ->with('articles', Article::fastPaginate(10));
+            ->with('articles', $articles);
     }
 }

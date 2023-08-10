@@ -9,7 +9,7 @@
 
         <div class="text-slate-400 dark:text-slate-500 text-xs lg:text-sm">
             <time datetime="{{ $article->created_at }}">
-                {{ $article->formatted_created_at }}
+                {{ $article->formatted_published_date }}
             </time>
 
             <span>
