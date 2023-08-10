@@ -13,6 +13,7 @@
                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-madison/50 hover:text-slate-900 dark:hover:text-slate-300'
         }}
     "
+    {{ $attributes->merge(['class']) }}
 >
     {{ $slot }}
 </x-app.link>

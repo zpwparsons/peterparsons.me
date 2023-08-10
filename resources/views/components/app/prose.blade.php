@@ -6,7 +6,7 @@
     <footer>
         <div class="mt-16 text-center">
             <p class="text-sm">
-                Powered by <a href="https://torchlight.dev/" target="_blank" rel="noopener" class="underline text-blue-600 dark:text-lime-400">Torchlight</a>
+                Code highlighted by <a href="https://torchlight.dev/" target="_blank" rel="noopener" class="underline text-blue-600 dark:text-lime-400">Torchlight</a>
             </p>
         </div>
     </footer>

@@ -4,19 +4,19 @@
             Articles
         </h1>
 
-        <hr class="my-8 dark:border-slate-600">
+        <hr class="my-8 dark:border-slate-700">
 
         <div class="space-y-12">
             @foreach($articles as $article)
                 <article>
-                    <h2 class="font-bold text-lg">
+                    <h2 class="font-bold text-xl">
                         <x-app.link href="{{ route('articles:show', $article) }}" class="text-blue-600 dark:text-lime-400 hover:underline">
                             {{ $article->title }}
                         </x-app.link>
                     </h2>
 
                     <p class="my-3">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi asperiores assumenda beatae.
+                        {{ $article->excerpt }}
                     </p>
 
                     <div class="flex items-center gap-x-3 mt-2">
@@ -26,6 +26,8 @@
                     </div>
                 </article>
             @endforeach
+
+            {{ $articles->links('components.app.pagination') }}
         </div>
     </div>
 </div>
