@@ -41,10 +41,11 @@ class ArticleTest extends TestCase
     /** @test **/
     public function it_can_get_the_formatted_content(): void
     {
-        $article = Article::factory()->create([
-            'content' => '# Article Title',
-        ]);
+        $article = Article::factory()->create(['content' => '# Article Content']);
 
-        self::assertStringContainsString('<h1>Article Title</h1>', $article->formatted_content);
+        self::assertStringContainsString(
+            '<h1>Article Content</h1>',
+            $article->formatted_content
+        );
     }
 }

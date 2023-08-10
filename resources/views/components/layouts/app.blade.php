@@ -6,8 +6,10 @@
 
         <meta name="theme-color" content="#ffffff">
         <meta name="color-scheme" content="light">
+        <x-seo::meta />
 
         <title>{{ $title ?? config('app.name') }}</title>
+
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

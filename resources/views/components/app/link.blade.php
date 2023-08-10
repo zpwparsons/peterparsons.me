@@ -1,1 +1,1 @@
-<a {{ $attributes->except('wire:navigate') }} wire:navigate.hover>{{ $slot }}</a>
+<a {{ $attributes->except('wire:navigate') }} wire:navigate>{{ $slot }}</a>
