@@ -1,8 +1,19 @@
 <div
-    x-data="{ open: false }"
-    @keyup.window.slash="open = true"
-    @keyup.window.meta.k="open = true"
-    @keyup.window.ctrl.k="open = true"
+    x-data="{
+        query: @entangle('query'),
+        open: false,
+        selectedHit: 0,
+        toggle() {
+            this.open = ! this.open;
+            this.query = '';
+        },
+    }"
+    x-init="$watch('query', () => this.selectedHit = 0)"
+    @keyup.slash.window="toggle"
+    @keyup.meta.k.window="toggle"
+    @keyup.ctrl.k.window="toggle"
+    @keyup.down.window.prevent="selectedHit == {{ $results->count() }} - 1 ? selectedHit = 0 : selectedHit++; document.getElementById('hit-' + selectedHit).scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'}); document.getElementById('hit-' + selectedHit).focus();"
+    @keyup.up.window.prevent="selectedHit == 0 ? selectedHit = {{ $results->count() }} - 1 : selectedHit--; document.getElementById('hit-' + selectedHit).scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'}); document.getElementById('hit-' + selectedHit).focus();"
     class="flex"
 >
     <button
@@ -39,8 +50,8 @@
             <div class="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
                 <div
                     x-show="open"
-                    @click.away="open = false"
-                    @keyup.escape="open = false"
+                    @click.away="toggle"
+                    @keyup.escape.window="toggle"
                     x-transition:enter="ease-out"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
@@ -48,7 +59,7 @@
                     x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
                     x-description="Search panel, show/hide based on search panel state."
-                    class="mx-auto transform-gpu overflow-hidden rounded-xl bg-white shadow-xl dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 sm:max-w-xl"
+                    class="mx-auto transform-gpu overflow-hidden rounded-xl bg-white shadow-xl dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 sm:max-w-2xl"
                 >
                     <div role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="search-label">
                         <form action="" novalidate="" role="search">
@@ -58,6 +69,8 @@
                                     <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z"></path>
                                 </svg>
                                 <input
+                                    wire:model.live="query"
+                                    x-ref="searchInput"
                                     class="flex-auto appearance-none bg-transparent pl-12 text-slate-900 text-sm lg:text-base outline-none placeholder:text-slate-400 focus:w-full focus:flex-none dark:text-white [&amp;::-webkit-search-cancel-button]:hidden [&amp;::-webkit-search-decoration]:hidden [&amp;::-webkit-search-results-button]:hidden [&amp;::-webkit-search-results-decoration]:hidden pr-4"
                                     aria-autocomplete="both"
                                     aria-labelledby="search-label"
@@ -70,12 +83,49 @@
                                     placeholder="Find something..."
                                     maxlength="512"
                                     type="search"
-                                    value=""
                                     tabindex="0"
                                 >
                             </div>
-                            <div class="border-t border-slate-200 bg-white px-2 py-3 empty:hidden dark:border-slate-400/10 dark:bg-slate-800"></div>
                         </form>
+
+                        @if ($query !== '')
+                            <ul class="max-h-[32rem] overflow-y-auto rounded-b-lg border-t border-slate-200 dark:border-slate-600 leading-6" role="listbox">
+                                @forelse ($results as $index => $result)
+                                    <li role="option" tabindex="-1">
+                                        <x-app.link
+                                            id="hit-{{ $index }}"
+                                            x-bind:class="selectedHit == {{ $index }} ? 'bg-slate-100 dark:bg-vulcan/50 ring ring-blue-600 dark:ring-lime-500' : 'ring-0 hover:bg-slate-100 dark:hover:bg-vulcan/50'"
+                                            class="block p-4 m-2.5 rounded-lg outline-none focus:bg-slate-100 focus:dark:bg-vulcan/50 focus:ring focus:ring-blue-600 dark:focus:ring-lime-500"
+                                            href="{{ $result->url }}"
+                                        >
+                                            <h2
+                                                x-html="@js($result->title()).replace(/({{ $query }})/gi, '<strong class=\'border-b border-blue-600 dark:border-lime-500\'>$1</strong>')"
+                                                class="text-blue-600 dark:text-lime-500 font-semibold"
+                                            >
+                                                {{ $result->title() }}
+                                            </h2>
+
+                                            <p
+                                                x-html="@js($result->entry).replace(/({{ $query }})/gi, '<strong class=\'border-b border-slate-600 text-blue-600 dark:border-lime-500 dark:text-lime-500\'>$1</strong>')"
+                                                class="mt-1.5 text-xs lg:text-sm font-normal"
+                                            >
+                                                {!! $result->highlightedSnippet() !!}
+                                            </p>
+                                        </x-app.link>
+                                    </li>
+                                @empty
+                                    <li class="flex items-center justify-center p-4" role="option" tabindex="-1" aria-selected="false">
+                                        <span class="px-2 sm:px-16 py-20 text-center">
+                                            <h2 class="font-bold">No results found</h2>
+
+                                            <p class="mt-3 leading-6 text-slate-400 dark:text-slate-500 text-xs lg:text-sm">
+                                                Oops! No luck finding what you're after. How about trying a different keyword?
+                                            </p>
+                                        </span>
+                                    </li>
+                                @endforelse
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -4,20 +4,10 @@ namespace Tests\Unit\Models;
 
 use App\Models\Article;
 use Illuminate\Support\Str;
-use Laravel\Scout\Searchable;
 use Tests\TestCase;
 
 class ArticleTest extends TestCase
 {
-    /** @test **/
-    public function it_is_searchable(): void
-    {
-        self::assertContains(
-            Searchable::class,
-            class_uses(Article::class),
-        );
-    }
-
     /** @test **/
     public function it_has_the_correct_fillable_attributes(): void
     {
@@ -34,7 +24,7 @@ class ArticleTest extends TestCase
     public function it_has_the_correct_casted_attributes(): void
     {
         $attributes = [
-            'id'           => 'int',
+            'id' => 'int',
             'published_at' => 'datetime',
         ];
 
@@ -84,18 +74,6 @@ class ArticleTest extends TestCase
             ->create();
 
         self::assertCount(2, Article::published()->get());
-    }
-
-    /** @test **/
-    public function it_can_check_if_it_should_be_searchable(): void
-    {
-        $article = Article::factory()->create(['published_at' => null]);
-
-        self::assertFalse($article->shouldBeSearchable());
-
-        $article = Article::factory()->create(['published_at' => now()]);
-
-        self::assertTrue($article->shouldBeSearchable());
     }
 
     /** @test **/

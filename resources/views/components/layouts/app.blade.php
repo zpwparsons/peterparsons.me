@@ -15,7 +15,7 @@
     </head>
     <body class="relative h-full overflow-hidden font-mono bg-slate-50 dark:bg-vulcan text-slate-600 dark:text-slate-400">
         <!-- Desktop navigation start -->
-        <div class="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0">
+        <div data-no-index class="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0">
             <x-app.navigation />
         </div>
         <!-- Desktop navigation end -->
@@ -23,7 +23,9 @@
         <div class="lg:pl-72 flex flex-col flex-1">
             <div class="flex overflow-hidden">
                 <div class="w-full">
-                    <x-app.top-bar />
+                    <div data-no-index>
+                        <x-app.top-bar />
+                    </div>
 
                     <main class="flex-1 relative z-0 h-screen overflow-y-auto focus:outline-none xl:order-last px-6 lg:px-8 py-4 lg:py-10">
                         <div class="mt-6 mb-20 max-w-prose mx-auto">

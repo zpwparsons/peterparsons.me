@@ -1,7 +1,7 @@
 <div>
     @seo([
         'title' => $article->title,
-        'description' => 'Some article description',
+        'description' => $article->excerpt,
     ])
 
     <x-app.prose>

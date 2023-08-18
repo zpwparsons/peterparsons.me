@@ -13,12 +13,12 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'        => $this->faker->sentence(),
-            'excerpt'      => $this->faker->sentence(nbWords: 12),
-            'content'      => $this->faker->paragraph(),
+            'title' => $this->faker->sentence(),
+            'excerpt' => $this->faker->sentence(nbWords: 12),
+            'content' => $this->faker->paragraph(),
             'published_at' => Carbon::now(),
-            'created_at'   => Carbon::now(),
-            'updated_at'   => Carbon::now(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

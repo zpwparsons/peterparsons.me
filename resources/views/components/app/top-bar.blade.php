@@ -7,7 +7,7 @@
     <button
         @click="open = true"
         type="button"
-        class="px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:focus:ring-lime-400 lg:hidden"
+        class="px-4 text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:focus:ring-lime-500 lg:hidden"
     >
         <span class="sr-only">Open sidebar</span>
         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

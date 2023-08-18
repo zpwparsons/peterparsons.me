@@ -1,4 +1,6 @@
 <div>
+    @seo(['title' => 'Articles'])
+
     @if($articles->count())
         <div class="max-w-2xl w-full mx-auto flex-1">
             <h1 class="font-bold text-2xl lg:text-3xl text-slate-900 dark:text-white">
@@ -10,11 +12,11 @@
             <div class="space-y-12">
                 @foreach($articles as $article)
                     <article>
-                        <h2 class="font-bold text-lg lg:text-xl">
-                            <x-app.link href="{{ route('articles:show', $article) }}" class="text-blue-600 dark:text-lime-400 hover:underline">
+                        <h1 class="font-bold text-lg lg:text-xl">
+                            <x-app.link href="{{ route('articles:show', $article) }}" class="text-blue-600 dark:text-lime-500 hover:underline">
                                 {{ $article->title }}
                             </x-app.link>
-                        </h2>
+                        </h1>
 
                         <p class="my-3 text-sm lg:text-base">
                             {{ $article->excerpt }}
@@ -44,7 +46,7 @@
             </p>
 
             <p class="mt-8">
-                Craving inspiration? Delve into my <x-app.link href="{{ route('uses') }}" class="text-blue-600 dark:text-lime-400">tools and resources</x-app.link>
+                Craving inspiration? Delve into my <x-app.link href="{{ route('uses') }}" class="text-blue-600 dark:text-lime-500">tools and resources</x-app.link>
                 or a peek into my digital toolbox.
             </p>
         </div>

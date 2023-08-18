@@ -8,12 +8,10 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Laravel\Scout\Searchable;
 
 class Article extends Model
 {
     use HasFactory;
-    use Searchable;
 
     protected $fillable = [
         'title',
@@ -47,11 +45,6 @@ class Article extends Model
     public function scopePublished(Builder $query): void
     {
         $query->whereNotNull('published_at');
-    }
-
-    public function shouldBeSearchable(): bool
-    {
-        return $this->isPublished();
     }
 
     protected function formattedContent(): Attribute
