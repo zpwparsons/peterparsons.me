@@ -10,7 +10,6 @@
 
         <title>{{ $title ?? config('app.name') }}</title>
 
-
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="relative h-full overflow-hidden font-mono bg-slate-50 dark:bg-vulcan text-slate-600 dark:text-slate-400">
