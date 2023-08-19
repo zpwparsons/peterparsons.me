@@ -17,7 +17,7 @@
     class="flex"
 >
     <button
-        @click="open = true"
+        @click="toggle"
         type="button"
         class="p-1 rounded-full text-slate-400 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none focus:ring-0"
     >
@@ -94,8 +94,8 @@
                                     <li role="option" tabindex="-1">
                                         <x-app.link
                                             id="hit-{{ $index }}"
-                                            x-bind:class="selectedHit == {{ $index }} ? 'bg-slate-100 dark:bg-vulcan/50 ring ring-blue-600 dark:ring-lime-500' : 'ring-0 hover:bg-slate-100 dark:hover:bg-vulcan/50'"
-                                            class="block p-4 m-2.5 rounded-lg outline-none focus:bg-slate-100 focus:dark:bg-vulcan/50 focus:ring focus:ring-blue-600 dark:focus:ring-lime-500"
+                                            x-bind:class="selectedHit == {{ $index }} ? 'bg-slate-100 dark:bg-vulcan/50' : 'hover:bg-slate-100 dark:hover:bg-vulcan/50'"
+                                            class="block p-4 m-2.5 rounded-lg outline-none"
                                             href="{{ $result->url }}"
                                         >
                                             <h2
