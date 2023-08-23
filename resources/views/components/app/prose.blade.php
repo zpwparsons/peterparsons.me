@@ -6,7 +6,7 @@
     <footer>
         <div class="mt-16 text-center">
             <p class="text-sm">
-                Code highlighted by <a href="https://torchlight.dev/" target="_blank" rel="noopener" class="underline text-blue-600 dark:text-lime-500">Torchlight</a>
+                Code highlighted by <x-app.external-link href="https://torchlight.dev/">Torchlight</x-app.external-link>
             </p>
         </div>
     </footer>
