@@ -29,7 +29,7 @@
                     Articles
                 </x-app.nav-link>
 
-                <h3 class="pt-8 pb-2 px-3 text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider" id="Me-headline">
+                <h3 class="pt-8 pb-2 px-3 text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">
                     Me
                 </h3>
 
@@ -44,7 +44,7 @@
                     Uses
                 </x-app.nav-link>
 
-                <h3 class="pt-8 pb-2 px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider" id="Online-headline">
+                <h3 class="pt-8 pb-2 px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
                     Online
                 </h3>
 
