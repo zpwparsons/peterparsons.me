@@ -12,7 +12,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="relative h-full overflow-hidden font-mono bg-slate-50 dark:bg-vulcan text-slate-600 dark:text-slate-400">
+    <body class="relative h-full overflow-hidden font-mono bg-slate-100 dark:bg-vulcan text-slate-600 dark:text-slate-400">
         <!-- Desktop navigation start -->
         <div data-no-index class="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0">
             <x-app.navigation />

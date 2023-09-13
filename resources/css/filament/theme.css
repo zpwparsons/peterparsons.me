@@ -1,0 +1,62 @@
+@import '../../../vendor/filament/filament/resources/css/theme.css';
+
+@config './tailwind.config.js';
+
+.fi-body {
+    @apply font-mono bg-slate-100 dark:bg-vulcan text-slate-600 dark:text-slate-400 !important;
+}
+
+.fi-logo {
+    @apply text-2xl font-bold text-blue-600 dark:text-lime-400 !important;
+}
+
+.fi-sidebar-header,
+.fi-topbar nav,
+.fi-sidebar,
+.fi-ta-ctn,
+.fi-section,
+.fi-dropdown-panel,
+.fi-modal-window,
+.fi-simple-main {
+    @apply bg-white dark:bg-mirage !important;
+}
+
+.fi-topbar nav,
+.fi-sidebar-header,
+.fi-sidebar-open {
+    @apply ring-slate-50 dark:ring-vulcan !important;
+}
+
+.fi-sidebar-group-items {
+    @apply gap-y-2 !important;
+}
+
+.fi-sidebar-item-icon {
+    @apply h-4 w-4 text-slate-400 dark:text-slate-500 !important;
+}
+
+.fi-sidebar-item a {
+    @apply text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-vulcan hover:text-slate-900 !important;
+}
+
+.fi-sidebar-item-active a {
+    @apply text-blue-600 dark:text-lime-400 bg-slate-100 dark:bg-vulcan !important;
+}
+
+.fi-section,
+.fi-simple-main {
+    @apply ring-slate-200 dark:ring-black-pearl !important;
+}
+
+.fi-ta-table th {
+    @apply bg-slate-50 dark:bg-black-pearl !important;
+}
+
+.fi-input-wrp,
+.fi-fo-markdown-editor {
+    @apply bg-slate-50 dark:bg-vulcan !important;
+}
+
+.f-input {
+    @apply bg-slate-50 dark:bg-vulcan rounded-lg !important;
+}
