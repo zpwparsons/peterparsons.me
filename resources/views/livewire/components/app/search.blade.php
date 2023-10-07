@@ -2,22 +2,32 @@
     x-data="{
         query: @entangle('query'),
         open: false,
-        selectedHit: 0,
-        toggle() {
-            this.open = ! this.open;
-            this.query = '';
+        selectedResult: -1,
+        openSearch() {
+            this.open = true;
         },
+        closeSearch() {
+            this.open = false;
+            this.query = '';
+            this.selectedResult = -1;
+        },
+        focusSelectedResult() {
+            const listItem = document.getElementById('result-' + this.selectedResult);
+            if (!listItem) return;
+            listItem.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'});
+            listItem.focus();
+        }
     }"
-    x-init="$watch('query', () => this.selectedHit = 0)"
-    @keyup.slash.window="toggle"
-    @keyup.meta.k.window="toggle"
-    @keyup.ctrl.k.window="toggle"
-    @keyup.down.window.prevent="selectedHit == {{ $results->count() }} - 1 ? selectedHit = 0 : selectedHit++; document.getElementById('hit-' + selectedHit).scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'}); document.getElementById('hit-' + selectedHit).focus();"
-    @keyup.up.window.prevent="selectedHit == 0 ? selectedHit = {{ $results->count() }} - 1 : selectedHit--; document.getElementById('hit-' + selectedHit).scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'}); document.getElementById('hit-' + selectedHit).focus();"
+    x-init="$watch('query', () => this.selectedResult = 0)"
+    @keyup.slash.window="openSearch"
+    @keyup.meta.k.window="openSearch"
+    @keyup.ctrl.k.window="openSearch"
+    @keyup.down.window.prevent="selectedResult == {{ $results->count() }} - 1 ? selectedResult = 0 : selectedResult++; focusSelectedResult();"
+    @keyup.up.window.prevent="selectedResult == 0 ? selectedResult = {{ $results->count() }} - 1 : selectedResult--; focusSelectedResult();"
     class="flex"
 >
     <button
-        @click="toggle"
+        @click="openSearch"
         type="button"
         class="p-1 rounded-full text-slate-400 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none focus:ring-0"
     >
@@ -50,8 +60,8 @@
             <div class="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
                 <div
                     x-show="open"
-                    @click.away="toggle"
-                    @keyup.escape.window="toggle"
+                    @click.away="closeSearch"
+                    @keyup.escape.window="closeSearch"
                     x-transition:enter="ease-out"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
@@ -75,6 +85,8 @@
                                     aria-autocomplete="both"
                                     aria-labelledby="search-label"
                                     id="search-input"
+                                    type="search"
+                                    autofocus
                                     autocomplete="off"
                                     autocorrect="off"
                                     autocapitalize="off"
@@ -82,19 +94,18 @@
                                     spellcheck="false"
                                     placeholder="Find something..."
                                     maxlength="512"
-                                    type="search"
                                     tabindex="0"
                                 >
                             </div>
                         </form>
 
-                        @if ($query !== '')
+                        <template x-if="query.length">
                             <ul class="max-h-[32rem] overflow-y-auto rounded-b-lg border-t border-slate-200 dark:border-slate-600 leading-6" role="listbox">
                                 @forelse ($results as $index => $result)
                                     <li role="option" tabindex="-1">
                                         <x-app.link
-                                            id="hit-{{ $index }}"
-                                            x-bind:class="selectedHit == {{ $index }} ? 'bg-slate-100 dark:bg-vulcan/50' : 'hover:bg-slate-100 dark:hover:bg-vulcan/50'"
+                                            id="result-{{ $index }}"
+                                            x-bind:class="selectedResult == {{ $index }} ? 'bg-slate-100 dark:bg-vulcan/50' : 'hover:bg-slate-100 dark:hover:bg-vulcan/50'"
                                             class="block p-4 m-2.5 rounded-lg outline-none"
                                             href="{{ $result->url }}"
                                         >
@@ -125,7 +136,7 @@
                                     </li>
                                 @endforelse
                             </ul>
-                        @endif
+                        </template>
                     </div>
                 </div>
             </div>

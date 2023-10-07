@@ -9,8 +9,6 @@ use Spatie\SiteSearch\Search as SiteSearch;
 
 class Search extends Component
 {
-    public bool $showSearch = false;
-
     public string $query = '';
 
     public function getResults(): Collection
