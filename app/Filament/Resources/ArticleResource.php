@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ArticleStatus;
 use App\Filament\Resources\ArticleResource\Pages\CreateArticle;
 use App\Filament\Resources\ArticleResource\Pages\EditArticle;
 use App\Filament\Resources\ArticleResource\Pages\ListArticles;
@@ -48,12 +49,9 @@ class ArticleResource extends Resource
                             ->columnSpan('full'),
 
                         Select::make('status')
-                            ->options([
-                                'draft' => 'Draft',
-                                'reviewing' => 'Reviewing',
-                                'published' => 'Published',
-                            ])
-                            ->required(),
+                            ->options(ArticleStatus::options())
+                            ->required()
+                            ->enum(ArticleStatus::class),
 
                         DateTimePicker::make('published_at'),
                     ]),

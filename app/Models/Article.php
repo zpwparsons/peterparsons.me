@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ArticleStatus;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -17,9 +18,12 @@ class Article extends Model
         'title',
         'excerpt',
         'content',
+        'status',
+        'published_at',
     ];
 
     protected $casts = [
+        'status' => ArticleStatus::class,
         'published_at' => 'datetime',
     ];
 
@@ -44,7 +48,7 @@ class Article extends Model
 
     public function scopePublished(Builder $query): void
     {
-        $query->whereNotNull('published_at');
+        $query->where('status', ArticleStatus::Published);
     }
 
     protected function formattedContent(): Attribute

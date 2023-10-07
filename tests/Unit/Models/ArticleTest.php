@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Models;
 
+use App\Enums\ArticleStatus;
 use App\Models\Article;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -15,6 +16,8 @@ class ArticleTest extends TestCase
             'title',
             'excerpt',
             'content',
+            'status',
+            'published_at',
         ];
 
         self::assertSame($attributes, (new Article())->getFillable());
@@ -25,6 +28,7 @@ class ArticleTest extends TestCase
     {
         $attributes = [
             'id' => 'int',
+            'status' => ArticleStatus::class,
             'published_at' => 'datetime',
         ];
 
@@ -67,9 +71,9 @@ class ArticleTest extends TestCase
         Article::factory()
             ->count(3)
             ->sequence(
-                ['published_at' => now()],
-                ['published_at' => null],
-                ['published_at' => now()],
+                ['status' => ArticleStatus::Published],
+                ['status' => ArticleStatus::Draft],
+                ['status' => ArticleStatus::Published],
             )
             ->create();
 
