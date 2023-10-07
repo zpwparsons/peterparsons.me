@@ -72,11 +72,9 @@
     </div>
     <!-- Mobile navigation end -->
 
-    <div class="flex-1 px-4 flex justify-end">
+    <div class="flex-1 px-4 flex justify-end items-center gap-3">
         <livewire:components.app.search />
 
-        <div class="ml-4 flex items-center">
-            <x-app.theme />
-        </div>
+        <x-app.theme />
     </div>
 </div>

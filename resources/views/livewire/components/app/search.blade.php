@@ -29,7 +29,7 @@
     <button
         @click="openSearch"
         type="button"
-        class="p-1 rounded-full text-slate-400 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none focus:ring-0"
+        class="p-1 rounded-md text-slate-400 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none focus:ring focus:ring-offset-2 dark:focus:ring-offset-mirage focus:ring-blue-600 dark:focus:ring-lime-500"
     >
         <span class="sr-only">Search</span>
         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
