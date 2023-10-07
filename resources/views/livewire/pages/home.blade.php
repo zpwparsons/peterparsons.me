@@ -3,7 +3,7 @@
 
     <hr class="my-8 dark:border-slate-600">
 
-    <p>I'm <x-app.external-link href="https://twitter.com/pw_parsons">@pw_parsons</x-app.external-link>, a digital daydreamer and coding enthusiast.</p>
+    <p>I'm <x-app.external-link href="https://x.com/pw_parsons">@pw_parsons</x-app.external-link>, a digital daydreamer and coding enthusiast.</p>
 
     <p>By day, I'm a full-snack developer, weaving code into captivating experiences; by night, my wife's worst nightmare 🤪.</p>
 
