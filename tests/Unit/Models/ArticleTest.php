@@ -4,6 +4,7 @@ namespace Tests\Unit\Models;
 
 use App\Enums\ArticleStatus;
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -66,7 +67,7 @@ class ArticleTest extends TestCase
     }
 
     /** @test **/
-    public function it_has_a_scope_to_get_published_articles(): void
+    public function it_has_a_scope_to_get_published_tags(): void
     {
         Article::factory()
             ->count(3)
@@ -78,6 +79,16 @@ class ArticleTest extends TestCase
             ->create();
 
         self::assertCount(2, Article::published()->get());
+    }
+
+    /** @test **/
+    public function it_belongs_to_many_articles(): void
+    {
+        $article = Article::factory()
+            ->has(Tag::factory()->count(3))
+            ->create();
+
+        self::assertInstanceOf(Tag::class, $article->tags->first());
     }
 
     /** @test **/

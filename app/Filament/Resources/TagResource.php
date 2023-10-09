@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ToolResource\Pages\CreateTool;
-use App\Filament\Resources\ToolResource\Pages\EditTool;
-use App\Filament\Resources\ToolResource\Pages\ListTools;
-use App\Models\Tool;
-use Filament\Forms\Components\MarkdownEditor;
+use App\Filament\Resources\TagResource\Pages\CreateTag;
+use App\Filament\Resources\TagResource\Pages\EditTag;
+use App\Filament\Resources\TagResource\Pages\ListTags;
+use App\Models\Tag;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -18,12 +17,13 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
-class ToolResource extends Resource
+class TagResource extends Resource
 {
-    protected static ?string $model = Tool::class;
+    protected static ?string $model = Tag::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-wrench-screwdriver';
+    protected static ?string $navigationIcon = 'heroicon-s-tag';
 
     public static function form(Form $form): Form
     {
@@ -32,20 +32,24 @@ class ToolResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
-                        TextInput::make('category')
+                        TextInput::make('slug')
+                            ->disabled()
                             ->required()
-                            ->maxLength(100),
+                            ->unique(Tag::class, 'slug', fn ($record) => $record),
 
-                        MarkdownEditor::make('description')
-                            ->columnSpan('full'),
+                        TextInput::make('name')
+                            ->required()
+                            ->reactive()
+                            ->maxLength(100)
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
 
                         Placeholder::make('created_at')
                             ->label('Created Date')
-                            ->content(fn (?Tool $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                            ->content(fn (?Tag $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                         Placeholder::make('updated_at')
                             ->label('Last Modified Date')
-                            ->content(fn (?Tool $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                            ->content(fn (?Tag $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
                     ]),
             ]);
     }
@@ -54,12 +58,13 @@ class ToolResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('category')
+                TextColumn::make('slug')
                     ->searchable()
                     ->sortable(),
-            ])
-            ->filters([
-                //
+
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->actions([
                 EditAction::make(),
@@ -77,16 +82,17 @@ class ToolResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListTools::route('/'),
-            'create' => CreateTool::route('/create'),
-            'edit' => EditTool::route('/{record}/edit'),
+            'index' => ListTags::route('/'),
+            'create' => CreateTag::route('/create'),
+            'edit' => EditTag::route('/{record}/edit'),
         ];
     }
 
     public static function getGloballySearchableAttributes(): array
     {
         return [
-            'category',
+            'slug',
+            'name',
         ];
     }
 }

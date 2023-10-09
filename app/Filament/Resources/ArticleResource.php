@@ -9,6 +9,7 @@ use App\Filament\Resources\ArticleResource\Pages\ListArticles;
 use App\Models\Article;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -23,6 +24,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Str;
 
 class ArticleResource extends Resource
 {
@@ -37,13 +39,24 @@ class ArticleResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
+                        TextInput::make('slug')
+                            ->disabled()
+                            ->required()
+                            ->unique(Article::class, 'slug', fn ($record) => $record),
+
                         TextInput::make('title')
                             ->required()
-                            ->maxLength(100),
+                            ->reactive()
+                            ->maxLength(100)
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
 
                         TextInput::make('excerpt')
                             ->required()
                             ->maxLength(255),
+
+                        Select::make('tags')
+                            ->multiple()
+                            ->relationship('tags', 'name'),
 
                         MarkdownEditor::make('content')
                             ->columnSpan('full'),
@@ -54,6 +67,14 @@ class ArticleResource extends Resource
                             ->enum(ArticleStatus::class),
 
                         DateTimePicker::make('published_at'),
+
+                        Placeholder::make('created_at')
+                            ->label('Created Date')
+                            ->content(fn (?Article $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+
+                        Placeholder::make('updated_at')
+                            ->label('Last Modified Date')
+                            ->content(fn (?Article $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
                     ]),
             ]);
     }
@@ -99,6 +120,14 @@ class ArticleResource extends Resource
             'index' => ListArticles::route('/'),
             'create' => CreateArticle::route('/create'),
             'edit' => EditArticle::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'slug',
+            'title',
         ];
     }
 }

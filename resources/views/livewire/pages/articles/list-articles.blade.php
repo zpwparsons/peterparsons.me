@@ -5,6 +5,12 @@
         <div class="max-w-2xl w-full mx-auto flex-1">
             <h1 class="font-bold text-2xl lg:text-3xl text-slate-900 dark:text-white">
                 Articles
+
+                @if($this->selectedTag)
+                    <span>
+                        ({{ $this->selectedTag->name }})
+                    </span>
+                @endif
             </h1>
 
             <hr class="my-8 dark:border-slate-700">
@@ -22,10 +28,21 @@
                             {{ $article->excerpt }}
                         </p>
 
-                        <div class="flex items-center gap-x-3 mt-2">
+                        <div class="flex items-center gap-x-4 mt-2">
                             <time datetime="2023-06-14 00:00:00" class="text-slate-400 dark:text-slate-500 text-xs lg:text-sm block">
                                 {{ $article->formatted_published_date }}
                             </time>
+
+                            <div class="flex gap-x-2">
+                                @foreach($article->tags as $tag)
+                                    <x-app.link
+                                        href="{{ route('articles:list', ['tag' => $tag->slug]) }}"
+                                        class="text-xs hover:no-underline font-medium text-slate-900 dark:text-slate-300 bg-slate-200 dark:bg-madison/50 inline-block px-2 py-1 rounded-lg"
+                                    >
+                                        {{ $tag->name }}
+                                    </x-app.link>
+                                @endforeach
+                            </div>
                         </div>
                     </article>
                 @endforeach
