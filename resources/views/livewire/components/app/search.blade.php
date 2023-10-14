@@ -72,35 +72,37 @@
                     class="mx-auto transform-gpu overflow-hidden rounded-xl bg-white shadow-xl dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 sm:max-w-2xl"
                 >
                     <div role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="search-label">
-                        <form action="" novalidate="" role="search">
-                            <div class="group relative flex h-14">
-                                <label for="search-input" id="search-input-label" class="sr-only">Search</label>
-                                <svg aria-hidden="true" viewBox="0 0 20 20" class="pointer-events-none absolute left-4 top-0 h-full w-5 fill-slate-400 dark:fill-slate-500">
-                                    <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z"></path>
-                                </svg>
-                                <input
-                                    wire:model.live="query"
-                                    x-ref="searchInput"
-                                    class="flex-auto appearance-none bg-transparent pl-12 text-slate-900 text-sm lg:text-base outline-none placeholder:text-slate-400 focus:w-full focus:flex-none dark:text-white [&amp;::-webkit-search-cancel-button]:hidden [&amp;::-webkit-search-decoration]:hidden [&amp;::-webkit-search-results-button]:hidden [&amp;::-webkit-search-results-decoration]:hidden pr-4"
-                                    aria-autocomplete="both"
-                                    aria-labelledby="search-label"
-                                    id="search-input"
-                                    type="search"
-                                    autofocus
-                                    autocomplete="off"
-                                    autocorrect="off"
-                                    autocapitalize="off"
-                                    enterkeyhint="search"
-                                    spellcheck="false"
-                                    placeholder="Find something..."
-                                    maxlength="512"
-                                    tabindex="0"
-                                >
-                            </div>
-                        </form>
+                        <header>
+                            <form action="" novalidate="" role="search">
+                                <div class="group relative flex h-14">
+                                    <label for="search-input" id="search-input-label" class="sr-only">Search</label>
+                                    <svg aria-hidden="true" viewBox="0 0 20 20" class="pointer-events-none absolute left-4 top-0 h-full w-5 fill-slate-400 dark:fill-slate-500">
+                                        <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z"></path>
+                                    </svg>
+                                    <input
+                                        wire:model.live="query"
+                                        x-ref="searchInput"
+                                        class="flex-auto appearance-none bg-transparent pl-12 text-slate-900 text-sm lg:text-base outline-none placeholder:text-slate-400 focus:w-full focus:flex-none dark:text-white [&amp;::-webkit-search-cancel-button]:hidden [&amp;::-webkit-search-decoration]:hidden [&amp;::-webkit-search-results-button]:hidden [&amp;::-webkit-search-results-decoration]:hidden pr-4"
+                                        aria-autocomplete="both"
+                                        aria-labelledby="search-label"
+                                        id="search-input"
+                                        type="search"
+                                        autofocus
+                                        autocomplete="off"
+                                        autocorrect="off"
+                                        autocapitalize="off"
+                                        enterkeyhint="search"
+                                        spellcheck="false"
+                                        placeholder="Find something..."
+                                        maxlength="512"
+                                        tabindex="0"
+                                    >
+                                </div>
+                            </form>
+                        </header>
 
                         <template x-if="query.length">
-                            <ul class="max-h-[32rem] overflow-y-auto rounded-b-lg border-t border-slate-200 dark:border-slate-600 leading-6" role="listbox">
+                            <ul class="max-h-[32rem] overflow-y-auto border-t border-slate-200 dark:border-slate-600 leading-6" role="listbox">
                                 @forelse ($results as $index => $result)
                                     <li role="option" tabindex="-1">
                                         <x-app.link
@@ -136,6 +138,52 @@
                                     </li>
                                 @endforelse
                             </ul>
+                        </template>
+
+                        <template x-if="query.length">
+                            <footer class="hidden md:block border-t border-slate-200 dark:border-slate-600">
+                                <ul class="p-3 flex justify-between">
+                                    <li class="flex items-center">
+                                        <kbd class="ml-1.5 rounded font-mono leading-6 py-0.5 px-1.5 bg-slate-200 dark:bg-madison">
+                                            <svg width="15" height="15" aria-label="Enter key" role="img">
+                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+                                                    <path d="M12 3.53088v3c0 1-1 2-2 2H4M7 11.53088l-3-3 3-3"></path>
+                                                </g>
+                                            </svg>
+                                        </kbd>
+                                        <span class="ml-2 text-xs">to select</span>
+                                    </li>
+
+                                    <li class="flex items-center">
+                                        <kbd class="ml-1.5 rounded font-mono leading-6 py-0.5 px-1.5 bg-slate-200 dark:bg-madison">
+                                            <svg width="15" height="15" aria-label="Arrow down" role="img">
+                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+                                                    <path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path>
+                                                </g>
+                                            </svg>
+                                        </kbd>
+                                        <kbd class="ml-1.5 rounded font-mono leading-6 py-0.5 px-1.5 bg-slate-200 dark:bg-madison">
+                                            <svg width="15" height="15" aria-label="Arrow up" role="img">
+                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+                                                    <path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path>
+                                                </g>
+                                            </svg>
+                                        </kbd>
+                                        <span class="ml-2 text-xs">to navigate</span>
+                                    </li>
+
+                                    <li class="flex items-center">
+                                        <kbd class="ml-1.5 rounded font-mono leading-6 py-0.5 px-1.5 bg-slate-200 dark:bg-madison">
+                                            <svg width="15" height="15" aria-label="Escape key" role="img">
+                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+                                                    <path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path>
+                                                </g>
+                                            </svg>
+                                        </kbd>
+                                        <span class="ml-2 text-xs">to close</span>
+                                    </li>
+                                </ul>
+                            </footer>
                         </template>
                     </div>
                 </div>

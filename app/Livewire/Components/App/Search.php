@@ -17,7 +17,7 @@ class Search extends Component
             return collect();
         }
 
-        return SiteSearch::onIndex($this->indexName())
+        return SiteSearch::onIndex('articles')
             ->query($this->query)
             ->limit(10)
             ->get()
@@ -26,12 +26,8 @@ class Search extends Component
 
     public function render(): View
     {
-        return view('livewire.components.app.search')
-            ->with('results', $this->getResults());
-    }
-
-    protected function indexName(): string
-    {
-        return 'articles';
+        return view('livewire.components.app.search', [
+            'results' => $this->getResults(),
+        ]);
     }
 }
