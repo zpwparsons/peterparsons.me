@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Requests\Api\ArticleIndexRequest;
+
 use function PHPUnit\Framework\assertSame;
 
 test('it has the correct rules', function () {

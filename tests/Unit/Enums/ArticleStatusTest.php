@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ArticleStatus;
+
 use function PHPUnit\Framework\assertSame;
 
 it('can get the available options', function () {

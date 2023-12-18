@@ -2,6 +2,7 @@
 
 use App\Models\Tool;
 use Illuminate\Support\Str;
+
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertStringContainsString;
 

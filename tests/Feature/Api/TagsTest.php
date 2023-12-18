@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Tag;
+
 use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');

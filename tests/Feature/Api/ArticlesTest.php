@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Article;
+
 use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');

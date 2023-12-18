@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Tag;
 use App\Models\Tool;
+
 use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');
