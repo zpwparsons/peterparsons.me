@@ -194,17 +194,3 @@ it('can paginate the listing of tags', function () {
 
     assertSame($expectedPaginationLinks, $response->json('links'));
 });
-
-it('can get a specified tag', function () {
-    $tag = Tag::factory()->create();
-
-    $this
-        ->getJson(route('api:tags:show', $tag))
-        ->assertOk()
-        ->assertExactJson([
-            'slug' => $tag->slug,
-            'name' => $tag->name,
-            'created_at' => $tag->created_at->toJson(),
-            'updated_at' => $tag->updated_at->toJson(),
-        ]);
-});
