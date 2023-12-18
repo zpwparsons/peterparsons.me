@@ -20,7 +20,7 @@ class ToolStoreRequest extends FormRequest
             'description' => [
                 'required',
                 'string',
-                'max:10_000',
+                'max:10000',
             ],
         ];
     }

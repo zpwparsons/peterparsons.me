@@ -18,7 +18,7 @@ it('has the correct rules', function () {
         'description' => [
             'required',
             'string',
-            'max:10_000',
+            'max:10000',
         ],
     ];
 

@@ -21,7 +21,7 @@ class ToolUpdateRequest extends FormRequest
             'description' => [
                 'sometimes',
                 'string',
-                'max:10_000',
+                'max:10000',
             ],
         ];
     }

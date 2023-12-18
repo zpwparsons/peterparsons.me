@@ -27,7 +27,7 @@ it('has the correct rules', function () {
         'description' => [
             'sometimes',
             'string',
-            'max:10_000',
+            'max:10000',
         ],
     ];
 

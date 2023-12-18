@@ -38,11 +38,11 @@ class ToolsController extends Controller
         return ToolResource::make($tool);
     }
 
-    public function update(ToolUpdateRequest $request, Tool $tool): ToolResource
+    public function update(ToolUpdateRequest $request, Tool $tool): Response
     {
         $tool->update($request->validated());
 
-        return ToolResource::make($tool);
+        return response()->noContent();
     }
 
     public function destroy(Tool $tool): Response

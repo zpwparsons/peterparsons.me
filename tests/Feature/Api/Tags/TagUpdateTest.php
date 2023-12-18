@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertSame;
 
-test('it can create a tag', function () {
+test('it can update a tag', function () {
     $user = User::factory()->create();
 
     $tag = Tag::factory()->create();
