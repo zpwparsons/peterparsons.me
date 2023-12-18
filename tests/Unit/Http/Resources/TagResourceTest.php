@@ -5,7 +5,7 @@ use App\Http\Resources\TagResource;
 use App\Models\Tag;
 use function PHPUnit\Framework\assertSame;
 
-it('it has the correct format', function () {
+it('has the correct format', function () {
     $tag = Tag::factory()->create();
 
     $resource = (TagResource::make($tag))
@@ -20,7 +20,7 @@ it('it has the correct format', function () {
     ], $resource);
 });
 
-it('it includes the articles when loaded', function () {
+it('includes the articles when loaded', function () {
     $tag = Tag::factory()->create();
 
     $resource = (TagResource::make($tag->loadMissing('articles')))

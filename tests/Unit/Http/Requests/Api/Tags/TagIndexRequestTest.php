@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Requests\Api\Articles\ArticleIndexRequest;
+use App\Http\Requests\Api\Tags\TagIndexRequest;
 use function PHPUnit\Framework\assertSame;
 
 it('has the correct rules', function () {
-    $request = new ArticleIndexRequest();
+    $request = new TagIndexRequest();
 
     $rules = [
         'limit' => [
@@ -14,7 +14,7 @@ it('has the correct rules', function () {
         ],
         'order_by' => [
             'nullable',
-            'in:title,created_at',
+            'in:name,created_at',
         ],
         'order_dir' => [
             'nullable',
@@ -30,7 +30,7 @@ it('has the correct rules', function () {
 });
 
 it('sets the default limit', function () {
-    $request = new ArticleIndexRequest();
+    $request = new TagIndexRequest();
 
     (new ReflectionMethod($request::class, 'passedValidation'))->invoke($request);
 
@@ -38,7 +38,7 @@ it('sets the default limit', function () {
 });
 
 it('sets the default order by field', function () {
-    $request = new ArticleIndexRequest();
+    $request = new TagIndexRequest();
 
     (new ReflectionMethod($request::class, 'passedValidation'))->invoke($request);
 
@@ -46,7 +46,7 @@ it('sets the default order by field', function () {
 });
 
 it('sets the default order direction', function () {
-    $request = new ArticleIndexRequest();
+    $request = new TagIndexRequest();
 
     (new ReflectionMethod($request::class, 'passedValidation'))->invoke($request);
 

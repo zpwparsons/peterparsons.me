@@ -4,7 +4,7 @@ use App\Http\Resources\ToolResource;
 use App\Models\Tool;
 use function PHPUnit\Framework\assertSame;
 
-it('it has the correct format', function () {
+it('has the correct format', function () {
     $tool = Tool::factory()->create();
 
     $resource = (ToolResource::make($tool))

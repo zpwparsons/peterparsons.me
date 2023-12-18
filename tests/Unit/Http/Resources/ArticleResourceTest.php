@@ -4,7 +4,7 @@ use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use function PHPUnit\Framework\assertSame;
 
-it('it has the correct format', function () {
+it('has the correct format', function () {
     $article = Article::factory()->create();
 
     $resource = (ArticleResource::make($article))
