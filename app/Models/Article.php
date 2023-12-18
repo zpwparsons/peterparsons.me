@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Article extends Model
 {
     use HasFactory;
+    use HasSlug;
 
     protected $fillable = [
         'title',
@@ -28,18 +31,16 @@ class Article extends Model
         'published_at' => 'datetime',
     ];
 
-    protected static function boot(): void
-    {
-        parent::boot();
-
-        static::saving(static function (Article $article) {
-            $article->slug = Str::slug($article->title);
-        });
-    }
-
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
     }
 
     public function isPublished(): bool

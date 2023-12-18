@@ -7,23 +7,22 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Tool extends Model
 {
     use HasFactory;
+    use HasSlug;
 
     protected $fillable = [
         'category',
         'description',
     ];
 
-    protected static function boot(): void
+    protected function formattedDescription(): Attribute
     {
-        parent::boot();
-
-        static::saving(static function (Tool $tool) {
-            $tool->slug = Str::slug($tool->category);
-        });
+        return Attribute::get(fn () => Markdown::convert($this->description)->getContent());
     }
 
     public function getRouteKeyName(): string
@@ -31,8 +30,11 @@ class Tool extends Model
         return 'slug';
     }
 
-    protected function formattedDescription(): Attribute
+    public function getSlugOptions(): SlugOptions
     {
-        return Attribute::get(fn () => Markdown::convert($this->description)->getContent());
+        return SlugOptions::create()
+            ->generateSlugsFrom('category')
+            ->saveSlugsTo('slug')
+            ->slugsShouldBeNoLongerThan(50);
     }
 }
