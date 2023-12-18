@@ -2,9 +2,9 @@
 
 use App\Enums\ArticleStatus;
 use App\Http\Requests\Api\Articles\ArticleIndexRequest;
-
 use App\Models\Tag;
 use Illuminate\Validation\Rule;
+
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertSame;
 

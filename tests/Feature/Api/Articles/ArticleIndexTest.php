@@ -2,8 +2,8 @@
 
 use App\Enums\ArticleStatus;
 use App\Models\Article;
-
 use App\Models\Tag;
+
 use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');
