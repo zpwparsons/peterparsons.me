@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Tags\TagIndexRequest;
 use App\Http\Requests\Api\Tags\TagStoreRequest;
 use App\Http\Requests\Api\Tags\TagUpdateRequest;
@@ -27,7 +28,7 @@ class TagsController extends Controller
 
     public function store(TagStoreRequest $request): TagResource
     {
-        $tag = Tag::create($request->only('name'));
+        $tag = Tag::create($request->validated());
 
         return TagResource::make($tag);
     }
@@ -41,7 +42,7 @@ class TagsController extends Controller
 
     public function update(TagUpdateRequest $request, Tag $tag): TagResource
     {
-        $tag->update($request->only('name'));
+        $tag->update($request->validated());
 
         return TagResource::make($tag);
     }
