@@ -13,7 +13,7 @@ test('it can update a tag', function () {
     $tag = Tag::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:tags:update', $tag), [
+        ->putJson(route('api.tags.update', $tag), [
             'name' => 'Laravel',
         ])
         ->assertNoContent();
@@ -27,7 +27,7 @@ test('the name is required', function () {
     $tag = Tag::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:tags:update', $tag))
+        ->putJson(route('api.tags.update', $tag))
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
         ->assertJson([
             'message' => 'The name field is required.',
@@ -40,7 +40,7 @@ test('the name must be a string', function () {
     $tag = Tag::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:tags:update', $tag), [
+        ->putJson(route('api.tags.update', $tag), [
             'name' => 1,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -55,7 +55,7 @@ test('the name must not be longer than 50 characters', function () {
     $tag = Tag::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:tags:update', $tag), [
+        ->putJson(route('api.tags.update', $tag), [
             'name' => str_repeat('a', 51),
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -72,7 +72,7 @@ test('the name must be unique', function () {
     $tag = Tag::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:tags:update', $tag), [
+        ->putJson(route('api.tags.update', $tag), [
             'name' => $existingTag->name,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -87,7 +87,7 @@ test('the unique check is ignored for the current tag', function () {
     $tag = Tag::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:tags:update', $tag), [
+        ->putJson(route('api.tags.update', $tag), [
             'name' => $tag->name,
         ])
         ->assertNoContent();
@@ -96,7 +96,7 @@ test('the unique check is ignored for the current tag', function () {
 test('unauthorized users cannot update a tag', function () {
     $tag = Tag::factory()->create();
 
-    $this->putJson(route('api:tags:update', $tag), [
+    $this->putJson(route('api.tags.update', $tag), [
         'name' => 'Laravel',
     ])
         ->assertUnauthorized();

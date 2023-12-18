@@ -2,6 +2,8 @@
 
 use App\Models\Tag;
 
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');
@@ -11,8 +13,10 @@ it('can get a listing of tags', function () {
         ->count(3)
         ->create();
 
-    $this
-        ->getJson(route('api:tags:index'))
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tags.index'))
         ->assertOk()
         ->assertJson([
             'data' => [
@@ -48,8 +52,10 @@ it('can search the listing of tags', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tags:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tags.index', [
             'search' => 'sure',
         ]))
         ->assertOk()
@@ -70,8 +76,10 @@ it('can order the tags by name in ascending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tags:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tags.index', [
             'order_by' => 'name',
             'order_dir' => 'asc',
         ]))
@@ -95,8 +103,10 @@ it('can order the tags by name in descending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tags:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tags.index', [
             'order_by' => 'name',
             'order_dir' => 'desc',
         ]))
@@ -120,8 +130,10 @@ it('can order the tags by created date in ascending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tags:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tags.index', [
             'order_by' => 'created_at',
             'order_dir' => 'asc',
         ]))
@@ -145,8 +157,10 @@ it('can order the tags by created date in descending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tags:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tags.index', [
             'order_by' => 'created_at',
             'order_dir' => 'desc',
         ]))
@@ -165,8 +179,10 @@ it('can limit the number of tags listed', function () {
         ->count(3)
         ->create();
 
-    $this
-        ->getJson(route('api:tags:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tags.index', [
             'limit' => 1,
         ]))
         ->assertOk()
@@ -179,18 +195,26 @@ it('can paginate the listing of tags', function () {
         ->create();
 
     $expectedPaginationLinks = [
-        'first' => route('api:tags:index', ['page' => 1]),
-        'last' => route('api:tags:index', ['page' => 10]),
-        'prev' => route('api:tags:index', ['page' => 1]),
-        'next' => route('api:tags:index', ['page' => 3]),
+        'first' => route('api.tags.index', ['page' => 1]),
+        'last' => route('api.tags.index', ['page' => 10]),
+        'prev' => route('api.tags.index', ['page' => 1]),
+        'next' => route('api.tags.index', ['page' => 3]),
     ];
 
-    $response = $this
-        ->getJson(route('api:tags:index', [
+    $user = User::factory()->create();
+
+    $response = actingAs($user)
+        ->getJson(route('api.tags.index', [
             'limit' => 1,
             'page' => 2,
         ]))
         ->assertOk();
 
     assertSame($expectedPaginationLinks, $response->json('links'));
+});
+
+test('unauthenticated users cannot get a listing of tags', function () {
+    $this
+        ->getJson(route('api.tags.index'))
+        ->assertUnauthorized();
 });

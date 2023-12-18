@@ -2,14 +2,18 @@
 
 use App\Models\Article;
 use App\Models\Tag;
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 
 it('can get a specified tag', function () {
     $tag = Tag::factory()
         ->has(Article::factory())
         ->create();
 
-    $this
-        ->getJson(route('api:tags:show', $tag))
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tags.show', $tag))
         ->assertOk()
         ->assertExactJson([
             'slug' => $tag->slug,
@@ -29,4 +33,12 @@ it('can get a specified tag', function () {
                 ],
             ],
         ]);
+});
+
+test('unauthenticated users cannot get a specified tag', function () {
+    $tag = Tag::factory()->create();
+
+    $this
+        ->getJson(route('api.tags.show', $tag))
+        ->assertUnauthorized();
 });

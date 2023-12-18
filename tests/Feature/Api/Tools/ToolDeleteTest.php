@@ -12,7 +12,7 @@ test('it can delete a tool', function () {
     $tool = Tool::factory()->create();
 
     actingAs($user)
-        ->deleteJson(route('api:tools:destroy', $tool))
+        ->deleteJson(route('api.tools.destroy', $tool))
         ->assertNoContent();
 
     assertDatabaseEmpty(Tool::class);
@@ -21,6 +21,6 @@ test('it can delete a tool', function () {
 test('unauthorized users cannot delete a tool', function () {
     $tool = Tool::factory()->create();
 
-    $this->putJson(route('api:tools:destroy', $tool))
+    $this->putJson(route('api.tools.destroy', $tool))
         ->assertUnauthorized();
 });

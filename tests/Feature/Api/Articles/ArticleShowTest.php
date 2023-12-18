@@ -1,12 +1,16 @@
 <?php
 
 use App\Models\Article;
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 
 it('can get a specified article', function () {
     $article = Article::factory()->create();
 
-    $this
-        ->getJson(route('api:articles:show', $article))
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.show', $article))
         ->assertOk()
         ->assertExactJson([
             'slug' => $article->slug,
@@ -18,4 +22,12 @@ it('can get a specified article', function () {
             'created_at' => $article->created_at->toJson(),
             'updated_at' => $article->updated_at->toJson(),
         ]);
+});
+
+test('unauthenticated users cannot get a specified article', function () {
+    $article = Article::factory()->create();
+
+    $this
+        ->getJson(route('api.articles.show', $article))
+        ->assertUnauthorized();
 });

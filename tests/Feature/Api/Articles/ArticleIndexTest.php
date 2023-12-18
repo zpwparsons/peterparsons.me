@@ -4,6 +4,8 @@ use App\Enums\ArticleStatus;
 use App\Models\Article;
 use App\Models\Tag;
 
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');
@@ -13,8 +15,10 @@ it('can get a listing of articles', function () {
         ->count(3)
         ->create();
 
-    $this
-        ->getJson(route('api:articles:index'))
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index'))
         ->assertOk()
         ->assertJson([
             'data' => [
@@ -62,8 +66,10 @@ it('can search the listing of articles', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index', [
             'search' => 'code',
         ]))
         ->assertOk()
@@ -84,8 +90,10 @@ it('can order the articles by title in ascending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index', [
             'order_by' => 'title',
             'order_dir' => 'asc',
         ]))
@@ -109,8 +117,10 @@ it('can order the articles by title in descending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index', [
             'order_by' => 'title',
             'order_dir' => 'desc',
         ]))
@@ -134,8 +144,10 @@ it('can order the articles by created date in ascending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index', [
             'order_by' => 'created_at',
             'order_dir' => 'asc',
         ]))
@@ -159,8 +171,10 @@ it('can order the articles by created date in descending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index', [
             'order_by' => 'created_at',
             'order_dir' => 'desc',
         ]))
@@ -179,8 +193,10 @@ it('can limit the number of articles listed', function () {
         ->count(3)
         ->create();
 
-    $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index', [
             'limit' => 1,
         ]))
         ->assertOk()
@@ -193,14 +209,16 @@ it('can paginate the listing of articles', function () {
         ->create();
 
     $expectedPaginationLinks = [
-        'first' => route('api:articles:index', ['page' => 1]),
-        'last' => route('api:articles:index', ['page' => 10]),
-        'prev' => route('api:articles:index', ['page' => 1]),
-        'next' => route('api:articles:index', ['page' => 3]),
+        'first' => route('api.articles.index', ['page' => 1]),
+        'last' => route('api.articles.index', ['page' => 10]),
+        'prev' => route('api.articles.index', ['page' => 1]),
+        'next' => route('api.articles.index', ['page' => 3]),
     ];
 
-    $response = $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    $response = actingAs($user)
+        ->getJson(route('api.articles.index', [
             'limit' => 1,
             'page' => 2,
         ]))
@@ -219,8 +237,10 @@ it('can filter articles that have a specified status', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index', [
             'status' => ArticleStatus::Draft,
         ]))
         ->assertOk()
@@ -250,8 +270,10 @@ it('can filter articles that have a specified tag', function () {
     $articles->get(1)->tags()->attach($tags);         // Article 2: PHP and Rust
     $articles->get(2)->tags()->attach($tags->get(1)); // Article 3: Rust
 
-    $this
-        ->getJson(route('api:articles:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.articles.index', [
             'tag' => 'PHP',
         ]))
         ->assertOk()
@@ -262,4 +284,10 @@ it('can filter articles that have a specified tag', function () {
                 ['slug' => $articles->get(1)->slug],
             ],
         ]);
+});
+
+test('unauthenticated users cannot get a listing of articles', function () {
+    $this
+        ->getJson(route('api.articles.index'))
+        ->assertUnauthorized();
 });

@@ -20,7 +20,7 @@
             </p>
 
             <p class="mt-8">
-                Feeling curious? Explore my <x-app.link href="{{ route('articles:list') }}" class="text-blue-600 dark:text-lime-500">articles</x-app.link>
+                Feeling curious? Explore my <x-app.link href="{{ route('articles.list') }}" class="text-blue-600 dark:text-lime-500">articles</x-app.link>
                 for insights and tips from my digital journey.
             </p>
         </div>

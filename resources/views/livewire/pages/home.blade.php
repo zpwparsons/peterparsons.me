@@ -5,7 +5,7 @@
 
     <p>I'm <x-app.external-link href="https://x.com/pw_parsons">@pw_parsons</x-app.external-link>, a digital daydreamer and coding enthusiast.</p>
 
-    <p>Check out my <x-app.link href="{{ route('articles:list') }}">articles</x-app.link> for insights, tips, and tales from the coding trenches.</p>
+    <p>Check out my <x-app.link href="{{ route('articles.list') }}">articles</x-app.link> for insights, tips, and tales from the coding trenches.</p>
 
     <p>Curious about the tools behind my craftsmanship? Swing by my <x-app.link href="{{ route('uses') }}">toolbox</x-app.link> for a curated list.</p>
 

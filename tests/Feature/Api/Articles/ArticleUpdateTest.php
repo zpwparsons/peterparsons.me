@@ -14,7 +14,7 @@ test('it can update a published article', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'title' => 'Building Better Code',
             'excerpt' => 'Importance of clean code.',
             'content' => 'Writing understandable code is essential to creating maintainable apps.',
@@ -39,7 +39,7 @@ test('the title must be a string', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'title' => 1,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -54,7 +54,7 @@ test('the excerpt must be a string', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'excerpt' => 1,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -69,7 +69,7 @@ test('the content must be a string', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'content' => 1,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -84,7 +84,7 @@ test('the title must not be longer than 255 characters', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'title' => str_repeat('a', 256),
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -99,7 +99,7 @@ test('the excerpt must not be longer than 255 characters', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'excerpt' => str_repeat('a', 256),
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -116,7 +116,7 @@ test('the title must be unique', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'title' => $existingArticle->title,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -131,7 +131,7 @@ test('the status must be a valid status', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'status' => 'invalid',
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -146,7 +146,7 @@ test('the published date is required when the status is published', function () 
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->putJson(route('api:articles:update', $article), [
+        ->putJson(route('api.articles.update', $article), [
             'status' => ArticleStatus::Published,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -158,6 +158,6 @@ test('the published date is required when the status is published', function () 
 test('unauthorized users cannot update a article', function () {
     $article = Article::factory()->create();
 
-    $this->putJson(route('api:articles:update', $article))
+    $this->putJson(route('api.articles.update', $article))
         ->assertUnauthorized();
 });

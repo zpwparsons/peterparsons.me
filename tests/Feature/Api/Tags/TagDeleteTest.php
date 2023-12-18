@@ -12,7 +12,7 @@ test('it can delete a tag', function () {
     $tag = Tag::factory()->create();
 
     actingAs($user)
-        ->deleteJson(route('api:tags:destroy', $tag))
+        ->deleteJson(route('api.tags.destroy', $tag))
         ->assertNoContent();
 
     assertDatabaseEmpty(Tag::class);
@@ -21,6 +21,6 @@ test('it can delete a tag', function () {
 test('unauthorized users cannot delete a tag', function () {
     $tag = Tag::factory()->create();
 
-    $this->putJson(route('api:tags:destroy', $tag))
+    $this->putJson(route('api.tags.destroy', $tag))
         ->assertUnauthorized();
 });

@@ -19,7 +19,7 @@
                     Home
                 </x-app.nav-link>
 
-                <x-app.nav-link :route="route('articles:list')" :active="request()->routeIs('articles*')">
+                <x-app.nav-link :route="route('articles.list')" :active="request()->routeIs('articles*')">
                     <span class="text-slate-400 dark:text-slate-500 mr-3 flex-shrink-0 h-4 w-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path>

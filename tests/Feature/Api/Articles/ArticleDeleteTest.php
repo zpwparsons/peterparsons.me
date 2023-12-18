@@ -12,7 +12,7 @@ test('it can delete a article', function () {
     $article = Article::factory()->create();
 
     actingAs($user)
-        ->deleteJson(route('api:articles:destroy', $article))
+        ->deleteJson(route('api.articles.destroy', $article))
         ->assertNoContent();
 
     assertDatabaseEmpty(Article::class);
@@ -21,6 +21,6 @@ test('it can delete a article', function () {
 test('unauthorized users cannot delete a article', function () {
     $article = Article::factory()->create();
 
-    $this->putJson(route('api:articles:destroy', $article))
+    $this->putJson(route('api.articles.destroy', $article))
         ->assertUnauthorized();
 });

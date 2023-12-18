@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 
-Route::prefix('articles')->name('articles:')->group(function () {
+Route::prefix('articles')->name('articles.')->group(function () {
     Route::get('/', ListArticles::class)->name('list');
     Route::get('/{article:slug}', ShowArticle::class)->name('show');
 });

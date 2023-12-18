@@ -11,7 +11,7 @@ test('it can create a tag', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tags:store'), [
+        ->postJson(route('api.tags.store'), [
             'name' => 'Laravel',
         ])
         ->assertCreated();
@@ -23,7 +23,7 @@ test('the name is required', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tags:store'))
+        ->postJson(route('api.tags.store'))
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
         ->assertJson([
             'message' => 'The name field is required.',
@@ -34,7 +34,7 @@ test('the name must be a string', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tags:store'), [
+        ->postJson(route('api.tags.store'), [
             'name' => 1,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -47,7 +47,7 @@ test('the name must not be longer than 50 characters', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tags:store'), [
+        ->postJson(route('api.tags.store'), [
             'name' => str_repeat('a', 51),
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -62,7 +62,7 @@ test('the name must be unique', function () {
     $existingTag = Tag::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tags:store'), [
+        ->postJson(route('api.tags.store'), [
             'name' => $existingTag->name,
         ])
         ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -72,7 +72,7 @@ test('the name must be unique', function () {
 });
 
 test('unauthorized users cannot create a tag', function () {
-    $this->postJson(route('api:tags:store'), [
+    $this->postJson(route('api.tags.store'), [
         'name' => 'Laravel',
     ])
         ->assertUnauthorized();

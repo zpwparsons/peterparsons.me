@@ -11,7 +11,7 @@ test('it can create a tool', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tools:store'), [
+        ->postJson(route('api.tools.store'), [
             'category' => 'Warp',
             'description' => 'Rust-based terminal with AI built in.',
         ])
@@ -27,7 +27,7 @@ test('the category must be a string', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tools:store'), [
+        ->postJson(route('api.tools.store'), [
             'category' => 1,
             'description' => 'Rust-based terminal with AI built in.',
         ])
@@ -41,7 +41,7 @@ test('the description must be a string', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tools:store'), [
+        ->postJson(route('api.tools.store'), [
             'category' => 'Warp',
             'description' => 1,
         ])
@@ -55,7 +55,7 @@ test('the category must not be longer than 100 characters', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tools:store'), [
+        ->postJson(route('api.tools.store'), [
             'category' => str_repeat('a', 101),
             'description' => 'Rust-based terminal with AI built in.',
         ])
@@ -69,7 +69,7 @@ test('the description must not be longer than 10000 characters', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tools:store'), [
+        ->postJson(route('api.tools.store'), [
             'category' => 'Warp',
             'description' => str_repeat('a', 10001),
         ])
@@ -85,7 +85,7 @@ test('the category must be unique', function () {
     $existingTool = Tool::factory()->create();
 
     actingAs($user)
-        ->postJson(route('api:tools:store'), [
+        ->postJson(route('api.tools.store'), [
             'category' => $existingTool->category,
             'description' => 'Rust-based terminal with AI built in.',
         ])
@@ -96,7 +96,7 @@ test('the category must be unique', function () {
 });
 
 test('unauthorized users cannot update a tool', function () {
-    $this->postJson(route('api:tools:store'), [
+    $this->postJson(route('api.tools.store'), [
         'category' => 'Warp',
         'description' => 'Rust-based terminal with AI built in.',
     ])

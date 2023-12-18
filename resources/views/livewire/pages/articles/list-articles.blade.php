@@ -19,7 +19,7 @@
                 @foreach($articles as $article)
                     <article>
                         <h1 class="font-bold text-lg lg:text-xl">
-                            <x-app.link href="{{ route('articles:show', $article) }}" class="text-blue-600 dark:text-lime-500 hover:underline">
+                            <x-app.link href="{{ route('articles.show', $article) }}" class="text-blue-600 dark:text-lime-500 hover:underline">
                                 {{ $article->title }}
                             </x-app.link>
                         </h1>
@@ -36,7 +36,7 @@
                             <div class="flex gap-x-2">
                                 @foreach($article->tags as $tag)
                                     <x-app.link
-                                        href="{{ route('articles:list', ['tag' => $tag->slug]) }}"
+                                        href="{{ route('articles.list', ['tag' => $tag->slug]) }}"
                                         class="text-xs hover:no-underline font-medium text-slate-900 dark:text-slate-300 bg-slate-200 dark:bg-madison/50 inline-block px-2 py-1 rounded-lg"
                                     >
                                         {{ $tag->name }}

@@ -2,6 +2,8 @@
 
 use App\Models\Tool;
 
+use App\Models\User;
+use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');
@@ -11,8 +13,10 @@ it('can get a listing of tools', function () {
         ->count(3)
         ->create();
 
-    $this
-        ->getJson(route('api:tools:index'))
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tools.index'))
         ->assertOk()
         ->assertJson([
             'data' => [
@@ -51,8 +55,10 @@ it('can search the listing of tools', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tools:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tools.index', [
             'search' => 'storm',
         ]))
         ->assertOk()
@@ -73,8 +79,10 @@ it('can order the tools by name in ascending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tools:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tools.index', [
             'order_by' => 'category',
             'order_dir' => 'asc',
         ]))
@@ -98,8 +106,10 @@ it('can order the tools by name in descending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tools:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tools.index', [
             'order_by' => 'category',
             'order_dir' => 'desc',
         ]))
@@ -123,8 +133,10 @@ it('can order the tools by created date in ascending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tools:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tools.index', [
             'order_by' => 'created_at',
             'order_dir' => 'asc',
         ]))
@@ -148,8 +160,10 @@ it('can order the tools by created date in descending order', function () {
         )
         ->create();
 
-    $this
-        ->getJson(route('api:tools:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tools.index', [
             'order_by' => 'created_at',
             'order_dir' => 'desc',
         ]))
@@ -168,8 +182,10 @@ it('can limit the number of tools listed', function () {
         ->count(3)
         ->create();
 
-    $this
-        ->getJson(route('api:tools:index', [
+    $user = User::factory()->create();
+
+    actingAs($user)
+        ->getJson(route('api.tools.index', [
             'limit' => 1,
         ]))
         ->assertOk()
@@ -182,18 +198,26 @@ it('can paginate the listing of tools', function () {
         ->create();
 
     $expectedPaginationLinks = [
-        'first' => route('api:tools:index', ['page' => 1]),
-        'last' => route('api:tools:index', ['page' => 10]),
-        'prev' => route('api:tools:index', ['page' => 1]),
-        'next' => route('api:tools:index', ['page' => 3]),
+        'first' => route('api.tools.index', ['page' => 1]),
+        'last' => route('api.tools.index', ['page' => 10]),
+        'prev' => route('api.tools.index', ['page' => 1]),
+        'next' => route('api.tools.index', ['page' => 3]),
     ];
 
-    $response = $this
-        ->getJson(route('api:tools:index', [
+    $user = User::factory()->create();
+
+    $response = actingAs($user)
+        ->getJson(route('api.tools.index', [
             'limit' => 1,
             'page' => 2,
         ]))
         ->assertOk();
 
     assertSame($expectedPaginationLinks, $response->json('links'));
+});
+
+test('unauthenticated users cannot get a listing of tools', function () {
+    $this
+        ->getJson(route('api.tools.index'))
+        ->assertUnauthorized();
 });
