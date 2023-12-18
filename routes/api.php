@@ -16,7 +16,7 @@ Route::prefix('tags')->name('tags:')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [TagsController::class, 'store'])->name('store');
-        Route::put('/{tag}', [TagsController::class, 'store'])->name('update');
+        Route::put('/{tag}', [TagsController::class, 'update'])->name('update');
         Route::delete('/{tag}', [TagsController::class, 'destroy'])->name('destroy');
     });
 });
@@ -27,7 +27,7 @@ Route::prefix('tools')->name('tools:')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [ToolsController::class, 'store'])->name('store');
-        Route::put('/{tool}', [ToolsController::class, 'store'])->name('update');
+        Route::put('/{tool}', [ToolsController::class, 'update'])->name('update');
         Route::delete('/{tool}', [ToolsController::class, 'destroy'])->name('destroy');
     });
 });

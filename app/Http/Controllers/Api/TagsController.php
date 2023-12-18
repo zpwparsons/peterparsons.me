@@ -40,11 +40,11 @@ class TagsController extends Controller
         return TagResource::make($tag);
     }
 
-    public function update(TagUpdateRequest $request, Tag $tag): TagResource
+    public function update(TagUpdateRequest $request, Tag $tag): Response
     {
         $tag->update($request->validated());
 
-        return TagResource::make($tag);
+        return response()->noContent();
     }
 
     public function destroy(Tag $tag): Response
