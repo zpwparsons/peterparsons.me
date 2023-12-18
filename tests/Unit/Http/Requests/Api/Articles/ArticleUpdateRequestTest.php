@@ -15,6 +15,7 @@ it('has the correct rules', function () {
     $request->setRouteResolver(function () use ($request, $article) {
         $route = Route::getRoutes()->match($request);
         $route->setParameter('article', $article);
+
         return $route;
     });
 

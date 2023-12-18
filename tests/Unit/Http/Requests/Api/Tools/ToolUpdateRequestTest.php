@@ -14,6 +14,7 @@ it('has the correct rules', function () {
     $request->setRouteResolver(function () use ($request, $tool) {
         $route = Route::getRoutes()->match($request);
         $route->setParameter('tool', $tool);
+
         return $route;
     });
 
