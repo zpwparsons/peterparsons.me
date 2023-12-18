@@ -2,17 +2,19 @@
 
 use App\Models\Article;
 use App\Models\Tag;
+use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertSame;
 
 it('has the correct fillable attributes', function () {
     $attributes = [
         'name',
     ];
 
-    self::assertSame($attributes, (new Tag())->getFillable());
+    assertSame($attributes, (new Tag())->getFillable());
 });
 
 it('has the correct route key name', function () {
-    self::assertSame('slug', (new Tag())->getRouteKeyName());
+    assertSame('slug', (new Tag())->getRouteKeyName());
 });
 
 it('belongs to many articles', function () {
@@ -20,5 +22,5 @@ it('belongs to many articles', function () {
         ->has(Article::factory()->count(3))
         ->create();
 
-    self::assertInstanceOf(Article::class, $tags->articles->first());
+    assertInstanceOf(Article::class, $tags->articles->first());
 });

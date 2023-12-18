@@ -22,4 +22,9 @@ class ArticlesController extends Controller
 
         return ArticleResource::collection($articles);
     }
+
+    public function show(Article $article): ArticleResource
+    {
+        return ArticleResource::make($article);
+    }
 }

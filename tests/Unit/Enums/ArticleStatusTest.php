@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ArticleStatus;
+use function PHPUnit\Framework\assertSame;
 
 it('can get the available options', function () {
     $options = [
@@ -8,5 +9,5 @@ it('can get the available options', function () {
         1 => ArticleStatus::Published->name,
     ];
 
-    self::assertSame($options, ArticleStatus::options());
+    assertSame($options, ArticleStatus::options());
 });

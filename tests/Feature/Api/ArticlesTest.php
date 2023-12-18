@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Article;
+use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');
 
@@ -14,9 +15,36 @@ it('can get a listing of articles', function () {
         ->assertOk()
         ->assertJson([
             'data' => [
-                ['title' => $articles->get(0)->title],
-                ['title' => $articles->get(1)->title],
-                ['title' => $articles->get(2)->title],
+                [
+                    'slug' => $articles->get(0)->slug,
+                    'title' => $articles->get(0)->title,
+                    'excerpt' => $articles->get(0)->excerpt,
+                    'content' => $articles->get(0)->content,
+                    'status' => $articles->get(0)->status->name,
+                    'published_at' => $articles->get(0)->published_at->toJson(),
+                    'created_at' => $articles->get(0)->created_at->toJson(),
+                    'updated_at' => $articles->get(0)->updated_at->toJson(),
+                ],
+                [
+                    'slug' => $articles->get(1)->slug,
+                    'title' => $articles->get(1)->title,
+                    'excerpt' => $articles->get(1)->excerpt,
+                    'content' => $articles->get(1)->content,
+                    'status' => $articles->get(1)->status->name,
+                    'published_at' => $articles->get(1)->published_at->toJson(),
+                    'created_at' => $articles->get(1)->created_at->toJson(),
+                    'updated_at' => $articles->get(1)->updated_at->toJson(),
+                ],
+                [
+                    'slug' => $articles->get(2)->slug,
+                    'title' => $articles->get(2)->title,
+                    'excerpt' => $articles->get(2)->excerpt,
+                    'content' => $articles->get(2)->content,
+                    'status' => $articles->get(2)->status->name,
+                    'published_at' => $articles->get(2)->published_at->toJson(),
+                    'created_at' => $articles->get(2)->created_at->toJson(),
+                    'updated_at' => $articles->get(2)->updated_at->toJson(),
+                ],
             ],
         ]);
 });
@@ -175,5 +203,23 @@ it('can paginate the listing of articles', function () {
         ]))
         ->assertOk();
 
-    self::assertSame($expectedPaginationLinks, $response->json('links'));
+    assertSame($expectedPaginationLinks, $response->json('links'));
+});
+
+it('can get a specified article', function () {
+    $article = Article::factory()->create();
+
+    $this
+        ->getJson(route('api:articles:show', $article))
+        ->assertOk()
+        ->assertExactJson([
+            'slug' => $article->slug,
+            'title' => $article->title,
+            'excerpt' => $article->excerpt,
+            'content' => $article->content,
+            'status' => $article->status->name,
+            'published_at' => $article->published_at->toJson(),
+            'created_at' => $article->created_at->toJson(),
+            'updated_at' => $article->updated_at->toJson(),
+        ]);
 });
