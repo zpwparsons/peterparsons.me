@@ -1,7 +1,9 @@
 <?php
 
+use App\Enums\ArticleStatus;
 use App\Models\Article;
 
+use App\Models\Tag;
 use function PHPUnit\Framework\assertSame;
 
 uses()->group('api');
@@ -205,4 +207,59 @@ it('can paginate the listing of articles', function () {
         ->assertOk();
 
     assertSame($expectedPaginationLinks, $response->json('links'));
+});
+
+it('can filter articles that have a specified status', function () {
+    $articles = Article::factory()
+        ->count(3)
+        ->sequence(
+            ['status' => ArticleStatus::Draft],
+            ['status' => ArticleStatus::Published],
+            ['status' => ArticleStatus::Draft],
+        )
+        ->create();
+
+    $this
+        ->getJson(route('api:articles:index', [
+            'status' => ArticleStatus::Draft,
+        ]))
+        ->assertOk()
+        ->assertJsonCount(2, 'data')
+        ->assertJson([
+            'data' => [
+                ['slug' => $articles->get(0)->slug],
+                ['slug' => $articles->get(2)->slug],
+            ],
+        ]);
+});
+
+it('can filter articles that have a specified tag', function () {
+    $articles = Article::factory()
+        ->count(3)
+        ->create();
+
+    $tags = Tag::factory()
+        ->count(2)
+        ->sequence(
+            ['name' => 'PHP'],
+            ['name' => 'Rust'],
+        )
+        ->create();
+
+    $articles->get(0)->tags()->attach($tags->get(0)); // Article 1: PHP
+    $articles->get(1)->tags()->attach($tags);         // Article 2: PHP and Rust
+    $articles->get(2)->tags()->attach($tags->get(1)); // Article 3: Rust
+
+    $this
+        ->getJson(route('api:articles:index', [
+            'tag' => 'PHP',
+        ]))
+        ->assertOk()
+        ->assertJsonCount(2, 'data')
+        ->assertJson([
+            'data' => [
+                ['slug' => $articles->get(0)->slug],
+                ['slug' => $articles->get(1)->slug],
+            ],
+        ]);
 });

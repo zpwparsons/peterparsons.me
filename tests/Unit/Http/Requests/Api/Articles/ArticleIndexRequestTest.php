@@ -1,7 +1,11 @@
 <?php
 
+use App\Enums\ArticleStatus;
 use App\Http\Requests\Api\Articles\ArticleIndexRequest;
 
+use App\Models\Tag;
+use Illuminate\Validation\Rule;
+use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertSame;
 
 it('has the correct rules', function () {
@@ -25,9 +29,17 @@ it('has the correct rules', function () {
             'nullable',
             'string',
         ],
+        'status' => [
+            'sometimes',
+            Rule::enum(ArticleStatus::class),
+        ],
+        'tag' => [
+            'sometimes',
+            Rule::exists(Tag::class, 'name'),
+        ],
     ];
 
-    assertSame($rules, $request->rules());
+    assertEquals($rules, $request->rules());
 });
 
 it('sets the default limit', function () {

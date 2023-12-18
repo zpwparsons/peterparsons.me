@@ -2,13 +2,18 @@
 
 namespace App\Http\Requests\Api\Articles;
 
+use App\Enums\ArticleStatus;
+use App\Models\Tag;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * @property int $limit
  * @property string $order_by
  * @property string $order_dir
  * @property string $search
+ * @property mixed $status
+ * @property string $tag
  */
 class ArticleIndexRequest extends FormRequest
 {
@@ -31,6 +36,14 @@ class ArticleIndexRequest extends FormRequest
             'search' => [
                 'nullable',
                 'string',
+            ],
+            'status' => [
+                'sometimes',
+                Rule::enum(ArticleStatus::class),
+            ],
+            'tag' => [
+                'sometimes',
+                Rule::exists(Tag::class, 'name'),
             ],
         ];
     }
