@@ -1,8 +1,8 @@
 <?php
 
 use App\Models\Tool;
-
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertSame;
 

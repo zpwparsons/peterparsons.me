@@ -3,8 +3,8 @@
 use App\Enums\ArticleStatus;
 use App\Models\Article;
 use App\Models\Tag;
-
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertSame;
 

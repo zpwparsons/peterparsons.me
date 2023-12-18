@@ -7,10 +7,10 @@ use App\Http\Resources\PersonalAccessTokenResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Laravel\Sanctum\PersonalAccessToken;
-use Illuminate\Http\Response;
 
 class PersonalAccessTokenController extends Controller
 {

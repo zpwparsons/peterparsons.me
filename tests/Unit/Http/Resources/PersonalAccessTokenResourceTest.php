@@ -2,6 +2,7 @@
 
 use App\Http\Resources\PersonalAccessTokenResource;
 use App\Models\User;
+
 use function PHPUnit\Framework\assertSame;
 
 it('has the correct format', function () {
