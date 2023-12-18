@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tools', static function (Blueprint $table) {
-            $table->string('slug', 50)->unique();
+            $table->string('slug', 50)->unique()->after('id');
         });
     }
 
