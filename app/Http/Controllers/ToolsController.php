@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ToolIndexRequest;
+use App\Http\Requests\Api\Tools\ToolIndexRequest;
 use App\Http\Resources\ToolResource;
 use App\Models\Tool;
 use Illuminate\Database\Eloquent\Builder;
