@@ -22,7 +22,7 @@ it('has the correct fillable attributes', function () {
         'published_at',
     ];
 
-    self::assertSame($attributes, (new Article())->getFillable());
+    assertSame($attributes, (new Article())->getFillable());
 });
 
 it('has the correct casted attributes', function () {
