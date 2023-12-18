@@ -15,10 +15,10 @@ class ArticleIndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'limit'     => ['nullable', 'integer', 'gte:1'],
-            'order_by'  => ['nullable', 'in:title,created_at'],
+            'limit' => ['nullable', 'integer', 'gte:1'],
+            'order_by' => ['nullable', 'in:title,created_at'],
             'order_dir' => ['nullable', 'in:asc,desc'],
-            'search'    => ['nullable', 'string'],
+            'search' => ['nullable', 'string'],
         ];
     }
 

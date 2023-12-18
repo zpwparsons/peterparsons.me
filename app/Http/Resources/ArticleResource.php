@@ -11,14 +11,14 @@ class ArticleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'slug'         => $this->slug,
-            'title'        => $this->title,
-            'excerpt'      => $this->excerpt,
-            'content'      => $this->content,
-            'status'       => $this->status,
+            'slug' => $this->slug,
+            'title' => $this->title,
+            'excerpt' => $this->excerpt,
+            'content' => $this->content,
+            'status' => $this->status,
             'published_at' => $this->published_at,
-            'created_at'   => $this->created_at,
-            'updated_at'   => $this->updated_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

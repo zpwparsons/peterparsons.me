@@ -1,36 +1,24 @@
 <?php
 
-namespace Tests\Unit\Models;
-
 use App\Models\Article;
 use App\Models\Tag;
-use Tests\TestCase;
 
-class TagTest extends TestCase
-{
-    /** @test **/
-    public function it_has_the_correct_fillable_attributes(): void
-    {
-        $attributes = [
-            'name',
-        ];
+it('has the correct fillable attributes', function () {
+    $attributes = [
+        'name',
+    ];
 
-        self::assertSame($attributes, (new Tag())->getFillable());
-    }
+    self::assertSame($attributes, (new Tag())->getFillable());
+});
 
-    /** @test **/
-    public function it_has_the_correct_route_key_name(): void
-    {
-        self::assertSame('slug', (new Tag())->getRouteKeyName());
-    }
+it('has the correct route key name', function () {
+    self::assertSame('slug', (new Tag())->getRouteKeyName());
+});
 
-    /** @test **/
-    public function it_belongs_to_many_articles(): void
-    {
-        $tags = Tag::factory()
-            ->has(Article::factory()->count(3))
-            ->create();
+it('belongs to many articles', function () {
+    $tags = Tag::factory()
+        ->has(Article::factory()->count(3))
+        ->create();
 
-        self::assertInstanceOf(Article::class, $tags->articles->first());
-    }
-}
+    self::assertInstanceOf(Article::class, $tags->articles->first());
+});

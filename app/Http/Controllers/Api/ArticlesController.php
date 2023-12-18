@@ -7,7 +7,6 @@ use App\Http\Requests\Api\ArticleIndexRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ArticlesController extends Controller
