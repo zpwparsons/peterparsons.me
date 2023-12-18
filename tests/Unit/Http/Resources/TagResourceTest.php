@@ -3,6 +3,7 @@
 use App\Http\Resources\ArticleResource;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
+
 use function PHPUnit\Framework\assertSame;
 
 it('has the correct format', function () {

@@ -3,6 +3,7 @@
 use App\Http\Requests\Api\Tags\TagStoreRequest;
 use App\Models\Tag;
 use Illuminate\Validation\Rule;
+
 use function PHPUnit\Framework\assertEquals;
 
 it('has the correct rules', function () {

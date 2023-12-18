@@ -30,6 +30,15 @@ class Article extends Model
         'published_at' => 'datetime',
     ];
 
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(static function (Article $article) {
+            $article->status = $article->status ?: ArticleStatus::Draft;
+        });
+    }
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()

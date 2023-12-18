@@ -3,6 +3,7 @@
 use App\Http\Requests\Api\Tools\ToolUpdateRequest;
 use App\Models\Tool;
 use Illuminate\Validation\Rule;
+
 use function PHPUnit\Framework\assertEquals;
 
 it('has the correct rules', function () {

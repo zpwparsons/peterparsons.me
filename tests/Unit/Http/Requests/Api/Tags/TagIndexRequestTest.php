@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Requests\Api\Tags\TagIndexRequest;
+
 use function PHPUnit\Framework\assertSame;
 
 it('has the correct rules', function () {

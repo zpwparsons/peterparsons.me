@@ -2,6 +2,7 @@
 
 use App\Http\Resources\ToolResource;
 use App\Models\Tool;
+
 use function PHPUnit\Framework\assertSame;
 
 it('has the correct format', function () {

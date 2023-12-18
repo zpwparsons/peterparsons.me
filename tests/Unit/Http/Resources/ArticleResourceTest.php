@@ -2,6 +2,7 @@
 
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
+
 use function PHPUnit\Framework\assertSame;
 
 it('has the correct format', function () {
