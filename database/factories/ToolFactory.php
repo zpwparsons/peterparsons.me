@@ -13,7 +13,7 @@ class ToolFactory extends Factory
     public function definition(): array
     {
         return [
-            'category' => $this->faker->word(),
+            'category' => $this->faker->unique()->word(),
             'description' => $this->faker->sentence(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
