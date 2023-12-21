@@ -21,7 +21,7 @@ class PersonalAccessTokenController extends Controller
         return PersonalAccessTokenResource::collection($tokens);
     }
 
-    public function store(PersonalAccessTokenStoreRequest $request): string
+    public function store(PersonalAccessTokenStoreRequest $request): array
     {
         $user = User::firstWhere('email', $request->email);
 
@@ -31,7 +31,7 @@ class PersonalAccessTokenController extends Controller
             ]);
         }
 
-        return $user->createToken($request->device_name)->plainTextToken;
+        return ['token' => $user->createToken($request->device_name)];
     }
 
     public function destroy(Request $request, PersonalAccessToken $token): Response

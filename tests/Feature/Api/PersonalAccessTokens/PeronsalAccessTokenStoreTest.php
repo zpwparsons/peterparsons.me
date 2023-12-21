@@ -12,7 +12,8 @@ it('can create personal access tokens', function () {
             'password' => 'password',
             'device_name' => 'Testing',
         ])
-        ->assertOk();
+        ->assertOk()
+        ->assertJsonStructure(['token']);
 });
 
 it('does not create a personal access token if an invalid email was provided', function () {

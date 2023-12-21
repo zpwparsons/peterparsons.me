@@ -37,7 +37,7 @@
         "phpunit/phpunit": "^10.5.3",
         "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^2.3.2",
-        "spatie/laravel-ray": "^1.33.0"
+        "spatie/laravel-ray": "^1.33"
     },
     "autoload": {
         "psr-4": {
